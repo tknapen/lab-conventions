@@ -79,6 +79,7 @@ When Claude (or any agent) edits this lab's code or analyses its data:
 - **Stay provisional** (principle 2). Report findings as candidate readings, not verdicts. **Stop at every analytic fork and ask** rather than silently picking the branch that confirms the expected story. Never present an exploratory finding as confirmatory. See `01-doing-science-with-claude.md`.
 - **Look before you summarize** (principle 3). Plot the raw distribution before reporting any summary number.
 - **Check robustness** (principle 4). Pair every headline effect with positive and negative controls and a sweep over the reasonable analytic choices before calling it a result.
+- **Match the inference to the regime** (principle 4; `02-inferential-robustness.md`). This is a low-n / high-trial (psychophysics / NHP) lab, not a 50-subject study: power is *within* subject (resample trials), reproducibility is *consistency across the few subjects* (show every subject individually), and you do **not** multiple-comparison-correct a descriptive ROI / voxel sweep at small n. Report effect sizes + within-subject CIs + cross-subject consistency, not a corrected group p.
 - **Log the reasoning** (principle 5). Record decisions, alternatives, and what was ruled out in the analysis log as you go.
 - **Never** write into `data/raw/`. This is enforced by `.claude/settings.json` `deny` rules.
 - **Never** modify lockfiles by hand (`uv.lock`, `pixi.lock`). Modify the manifest and run the lock command.

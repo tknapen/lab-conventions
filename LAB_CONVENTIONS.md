@@ -30,7 +30,7 @@ numbers track that priority — read low-to-high.
 |---|---|
 | `00-principles.md` | The nine principles everything else follows from — culture first (incl. *the analyst surfaces, the user judges*; *no premature conclusions*; *look before you summarize*; *robustness is part of the claim*; *the record is part of the result*). Read first. |
 | `01-doing-science-with-claude.md` | How the agent behaves: surface every fork and stop for the user; provisional language; exploratory-vs-confirmatory labelling; surface disconfirming evidence first. |
-| `02-inferential-robustness.md` | Multiverse-lite sweeps, positive/negative controls, sensitivity analysis, blind-ish analysis — checking a result from many perspectives. |
+| `02-inferential-robustness.md` | The lab's low-n/high-trial inference regime (within-subject power + cross-subject consistency, no MC over descriptive sweeps); multiverse-lite sweeps, positive/negative controls, sensitivity analysis, blind-ish analysis. |
 | `03-analysis-log.md` | The append-only decision log: what was tried, chosen, ruled out, and why — legible months later. |
 | `04-reporting.md` | Interpretation-ready reporting of every result (prose, tables, chat), not just figures. |
 | `05-dashboards.md` | Interpretation dashboards: juxtapose the result with hypothesis schematics (same plot fn, idealized data) + self-documenting text. |

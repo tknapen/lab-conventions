@@ -15,6 +15,40 @@ transforms, thresholds — can manufacture or erase an effect (the multiverse /
 specification-curve literature). A single team cannot recruit seventy analysts,
 but it can approximate the insight in-house with the four checks below.
 
+## The inference regime — few subjects, sampled deeply
+
+This lab runs a **low-n, high-trial** design: a handful of "thoroughbred" subjects
+each sampled to the hilt (thousands of trials / stimuli per subject), in the
+**psychophysics / non-human-primate** tradition — *not* a 50-subject
+cognitive-neuroscience study. That tradition has produced far more reproducible
+results than large-n / few-trial designs, and it changes what inference looks like
+here. Read the four checks below through this lens:
+
+- **The unit of evidence is the individual subject.** Power comes from the
+  *within-subject* trial count, not the subject count. Establish an effect within a
+  subject with a **resampling test over trials / stimuli** (permutation or
+  bootstrap) — that is where the degrees of freedom actually are.
+- **Reproducibility = consistency across the few subjects.** Show **every subject
+  individually** (n = 6 → six lines/points, each with its within-subject error); the
+  endpoint is "*k of N* subjects show it, each within-subject reliable", not a pooled
+  group statistic. With a handful of deeply-sampled subjects the individual
+  replications are the strong evidence; a group t-test is the weak version.
+- **Do NOT multiple-comparison-correct across a descriptive sweep.** Pushing 27 ROIs
+  (or a whole-brain map) through Bonferroni / BH at n = 6 is self-defeating and
+  conceptually wrong: a hierarchy / ROI *profile* is a characterization, not a family
+  of independent hypotheses to be guarded. Report effect sizes, within-subject CIs,
+  and cross-subject consistency across the sweep. Reserve formal correction for a
+  genuinely pre-registered confirmatory family, and prefer a few **a-priori
+  endpoints** over a corrected fishing expedition.
+- **The multiverse and controls below still apply** — but per subject and as
+  consistency across subjects, not as a group-level correction exercise.
+
+*Why:* deep within-subject sampling makes each subject a high-precision replication,
+so the reproducibility question is "does it replicate across these few?", which
+individual-subject display answers directly. Blanket multiple-comparison correction
+over a low-n descriptive sweep mostly destroys power for no inferential gain — it
+guards a family-wise error rate for a family you are not testing.
+
 ## Check 1 — the multiverse-lite sweep
 
 For a headline effect, identify the **2–4 most consequential analytic choices**
