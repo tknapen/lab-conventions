@@ -1,4 +1,4 @@
-# 04 — Testing
+# 09 — Testing
 
 ## Configuration
 
@@ -75,6 +75,37 @@ def synthetic_bids(tmp_path_factory):
     # generate dataset_description.json, sub-01 anat + func, events.tsv, ...
     return root
 ```
+
+### Control tests — can the method detect (and not invent) the effect?
+
+The synthetic generators that embody each hypothesis double as tests, dashboard
+schematics (`05-dashboards.md`), and inferential controls (`02-inferential-robustness.md`).
+Write them once; use them three times. Two kinds, both required for any analysis
+that carries a headline claim:
+
+- **Positive control** — feed data with a *planted* effect and assert the analysis
+  recovers it. If the planted effect does not come back, the method cannot detect
+  the real one, and a null from it is uninterpretable.
+- **Negative control** — feed label-shuffled / phase-scrambled / pure-noise data and
+  assert the analysis returns the null. If an effect appears here, the pipeline
+  manufactures it — a false-positive factory.
+
+```python
+def test_detects_planted_effect(rng):
+    data = synth_with_effect(delta=0.3, rng=rng)   # same generator as the dashboard
+    assert estimate_effect(data) == pytest.approx(0.3, abs=0.05)
+
+def test_null_under_label_shuffle(rng):
+    data = synth_null(rng=rng)                      # no effect by construction
+    null = [estimate_effect(shuffle_labels(data, rng)) for _ in range(200)]
+    assert abs(np.mean(null)) < 0.02               # negative control stays flat
+```
+
+*Why:* a test suite that only checks "the code runs" cannot tell signal from
+artifact. Planted-effect and shuffled-null cases are the statistical sanity checks —
+the positive control proves a null is a true absence rather than a broken method;
+the negative control defines the noise floor (Wilson et al., "Good enough practices
+in scientific computing"). They are the same fixtures `02` and `05` rely on.
 
 ### Numerical tolerance
 

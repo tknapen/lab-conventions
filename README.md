@@ -1,6 +1,6 @@
 # lab-conventions
 
-Authoritative reference for how code in this lab is written, built, tested, and run. Read `LAB_CONVENTIONS.md` for the index; read every numbered file before doing non-trivial work in a project that imports this.
+Authoritative reference for how this lab does science — how results are reasoned about, and how code is written, built, tested, and run. We do **solid, not speedy** science: inferential robustness, no premature conclusions, inspecting data from many angles, and letting the user adjudicate at every fork. The "how we reason" files (`00`–`04`) come first and outrank the "how we build" files. Read `LAB_CONVENTIONS.md` for the index; read every numbered file before doing non-trivial work in a project that imports this.
 
 ## Vendoring into a project
 
@@ -71,7 +71,7 @@ A new convention enters this directory by PR. The PR must:
 
 1. Touch only the numbered files relevant to the change.
 2. Explain *why* in the rationale section (every rule has a `*Why:*` line).
-3. Update `09-when-to-deviate.md` if the change introduces a new exception class.
+3. Update `16-when-to-deviate.md` if the change introduces a new exception class.
 4. Bump the version tag.
 
 If you find yourself wanting to override a convention in a project's `CLAUDE.md` more than once, the convention is wrong — fix it here, don't accumulate overrides in projects.

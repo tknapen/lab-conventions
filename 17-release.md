@@ -1,4 +1,4 @@
-# 10 — Release
+# 17 — Release
 
 **Read this file only when actually releasing a project.** Day-to-day lab work doesn't need any of it.
 
@@ -188,7 +188,7 @@ Semantic versioning, strictly:
 - `PATCH` for bugfixes, no API changes.
 - `MINOR` for backwards-compatible new functionality.
 - `MAJOR` for breaking changes. Releases before `1.0.0` may break in minor versions — document it in `CHANGELOG.md`.
-- The version comes from the git tag via `uv-dynamic-versioning` (see `02-packaging.md`); never hardcode it.
+- The version comes from the git tag via `uv-dynamic-versioning` (see `07-packaging.md`); never hardcode it.
 
 *Why:* downstream users pin via SemVer ranges (`^0.3` etc.); violating SemVer breaks their lockfiles silently. The lab will get bug reports either way; SemVer makes them about real bugs, not surprise breakage.
 

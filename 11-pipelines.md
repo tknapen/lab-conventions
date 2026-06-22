@@ -1,4 +1,4 @@
-# 06 — Pipelines
+# 11 — Pipelines
 
 ## Snakemake for orchestration
 
@@ -10,7 +10,7 @@ Multi-step analyses (anything that touches more than one subject, or that has mo
 
 - Pipelines live in `workflow/` (Snakemake's canonical location).
 - Every rule has an `output:` declaration. No rule writes files it doesn't claim.
-- Pipeline outputs go to `data/processed/`. AI-generated artifacts go to `data/generated/`. See `07-project-layout.md`.
+- Pipeline outputs go to `data/processed/`. AI-generated artifacts go to `data/generated/`. See `12-project-layout.md`.
 - Rules use `conda:` or `container:` directives for their environment, not the calling shell's. This keeps rules portable to HPC and CI.
 - The `Snakefile` is type-checked via `snakemake --lint`.
 - Always run `snakemake -n` (dry-run) before `snakemake --cores N` after any change.
@@ -52,7 +52,7 @@ snakemake --executor slurm --jobs 100 --workflow-profile profiles/slurm
 
 ## Provenance
 
-For neuroimaging-shaped projects, pair Snakemake with **DataLad** (see `07-project-layout.md`). DataLad's `datalad run` captures the command, container, and code commit that produced an output. This is the lab's provenance layer.
+For neuroimaging-shaped projects, pair Snakemake with **DataLad** (see `12-project-layout.md`). DataLad's `datalad run` captures the command, container, and code commit that produced an output. This is the lab's provenance layer.
 
 *Why:* "which version of fMRIPrep produced this derivative?" is a question DataLad answers in one command and a bare Snakemake setup cannot.
 
@@ -65,4 +65,4 @@ For neuroimaging-shaped projects, pair Snakemake with **DataLad** (see `07-proje
 
 ## When Snakemake is overkill
 
-For a single-stage script that runs once and produces one figure, use a PEP 723 inline-metadata script (see `08-commands.md`) instead. Snakemake is for *multi-stage* or *multi-subject* work.
+For a single-stage script that runs once and produces one figure, use a PEP 723 inline-metadata script (see `13-commands.md`) instead. Snakemake is for *multi-stage* or *multi-subject* work.

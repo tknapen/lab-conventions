@@ -1,4 +1,4 @@
-# 07 — Project layout
+# 12 — Project layout
 
 ## The canonical directory tree
 
@@ -9,7 +9,7 @@ myproject/
 ├── pixi.lock               # only if [tool.pixi.*] is used
 ├── README.md
 ├── CLAUDE.md               # project-specific instructions; references lab-conventions/
-├── justfile                # standard commands; see 08-commands.md
+├── justfile                # standard commands; see 13-commands.md
 ├── .pre-commit-config.yaml
 ├── .gitignore
 ├── .claude/

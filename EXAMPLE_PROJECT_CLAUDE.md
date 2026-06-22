@@ -12,17 +12,27 @@ One-sentence description of what this project is.
 
 Follow `lab-conventions/LAB_CONVENTIONS.md` and every file it indexes. Specifically:
 
-- `lab-conventions/00-principles.md` — the non-negotiables
-- `lab-conventions/01-environments.md` — uv + pixi
-- `lab-conventions/02-packaging.md` — `pyproject.toml` shape
-- `lab-conventions/03-code-quality.md` — ruff, pyrefly, jaxtyping
-- `lab-conventions/04-testing.md` — pytest, hypothesis, syrupy
-- `lab-conventions/05-notebooks.md` — marimo, thin-notebook rule
-- `lab-conventions/06-pipelines.md` — Snakemake, containers
-- `lab-conventions/07-project-layout.md` — directory tree, data tiers
-- `lab-conventions/08-commands.md` — the `justfile`
-- `lab-conventions/09-when-to-deviate.md` — explicit exceptions
-- `lab-conventions/10-release.md` — read only when releasing
+**How we reason (read first — these outrank the build files):**
+
+- `lab-conventions/00-principles.md` — the nine principles, culture first
+- `lab-conventions/01-doing-science-with-claude.md` — surface every fork and stop for me; stay provisional; label exploratory vs confirmatory
+- `lab-conventions/02-inferential-robustness.md` — multiverse sweep, positive/negative controls, sensitivity, blinding
+- `lab-conventions/03-analysis-log.md` — the append-only decision log
+- `lab-conventions/04-reporting.md` — interpretation-ready reporting of every result
+- `lab-conventions/05-dashboards.md` — interpretation dashboards
+
+**How we build:**
+
+- `lab-conventions/06-environments.md` — uv + pixi
+- `lab-conventions/07-packaging.md` — `pyproject.toml` shape
+- `lab-conventions/08-code-quality.md` — ruff, pyrefly, jaxtyping
+- `lab-conventions/09-testing.md` — pytest, hypothesis, syrupy, controls
+- `lab-conventions/10-notebooks.md` — marimo, thin-notebook + look-first rules
+- `lab-conventions/11-pipelines.md` — Snakemake, containers
+- `lab-conventions/12-project-layout.md` — directory tree, data tiers
+- `lab-conventions/13-commands.md` — the `justfile`
+- `lab-conventions/16-when-to-deviate.md` — explicit exceptions
+- `lab-conventions/17-release.md` — read only when releasing
 
 ## Lab style
 
@@ -73,6 +83,7 @@ None.
      in flux. Keep this section fresh; delete stale items. -->
 
 - Currently fitting divisive-normalization model variants; see `notebooks/02_model_fitting.py`.
+  Status: **exploratory** — no confirmatory claims yet. Decision log: `docs/notes/model_fitting.log.md`.
 - Open question: power-law vs exponential adaptation; see `docs/notes/adaptation.md`.
 
 ### Do NOT

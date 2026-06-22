@@ -1,4 +1,4 @@
-# 01 — Environments
+# 06 — Environments
 
 ## Two managers, two manifests, one project
 
@@ -22,7 +22,7 @@ There is no third option. Never use `conda` or `mamba` directly in a new project
 - Use **`[dependency-groups]`** (PEP 735), not `[tool.uv.dev-dependencies]`. The latter still works but is the old shape.
 - Commit `uv.lock`. Run `uv sync --locked` in CI; the build fails if the lock drifts.
 - For installing CLI tools (ruff, marimo, pyrefly, ty) globally outside any project, use `uv tool install`. For running commands inside the project env, use `uv run`.
-- For one-off analysis scripts that should be runnable from a fresh machine, use **PEP 723 inline metadata** — see `08-commands.md`.
+- For one-off analysis scripts that should be runnable from a fresh machine, use **PEP 723 inline metadata** — see `13-commands.md`.
 
 *Why:* lockfiles are reproducibility; dependency groups are the standardized successor to dev-deps; managed Python eliminates the "works on my machine but not on the cluster" class of bug.
 
@@ -49,4 +49,4 @@ There is no third option. Never use `conda` or `mamba` directly in a new project
 - `uv sync` is exact by default (removes extraneous packages); `uv run` is inexact by default (won't remove). Use `uv sync --locked` in CI.
 - pixi PyPI deps override `[project.dependencies]` only when names match; otherwise both are installed.
 - For GPU stacks (torch, jax with CUDA), prefer pixi's `[tool.pixi.pypi-dependencies]` with explicit indices — easier than uv's source-and-no-build-isolation workarounds.
-- The `uv_build` backend does not yet integrate with `uv-dynamic-versioning`. Use hatchling for now; see `02-packaging.md`.
+- The `uv_build` backend does not yet integrate with `uv-dynamic-versioning`. Use hatchling for now; see `07-packaging.md`.

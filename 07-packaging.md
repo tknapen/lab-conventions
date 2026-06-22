@@ -1,4 +1,4 @@
-# 02 — Packaging
+# 07 — Packaging
 
 Every project — even a one-shot analysis — is structured as an installable Python package. This is non-negotiable.
 
@@ -46,8 +46,8 @@ source = "uv-dynamic-versioning"
 [tool.uv-dynamic-versioning]
 pattern = "default-unprefixed"
 
-# Tool sections live below: see 03-code-quality.md for ruff/pyrefly,
-# 04-testing.md for pytest, 01-environments.md for [tool.pixi].
+# Tool sections live below: see 08-code-quality.md for ruff/pyrefly,
+# 09-testing.md for pytest, 06-environments.md for [tool.pixi].
 ```
 
 ## Hard rules

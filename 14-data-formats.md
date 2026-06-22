@@ -1,4 +1,4 @@
-# 11 — Data formats (intermediate & derived files)
+# 14 — Data formats (intermediate & derived files)
 
 Every intermediate or derived artifact is stored in a **self-documenting, cross-language**
 format. Never a Python-only opaque one. A `.npy`/`.npz`/`.pkl` is a riddle six months later
@@ -114,7 +114,7 @@ lingering NFS lock). A parallel `save_table` / `load_table` does the same for pa
   precision is load-bearing. (That is the *storage-budget* convention — what/whether to
   save — which is separate from this *format* convention.)
 
-## When to deviate (see `09-when-to-deviate.md`)
+## When to deviate (see `16-when-to-deviate.md`)
 
 - A genuinely ragged or deeply nested object with no array/table representation may need a
   structured text format (JSON / msgpack) — document why. In practice most "I need pickle"
