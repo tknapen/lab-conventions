@@ -15,39 +15,40 @@ transforms, thresholds — can manufacture or erase an effect (the multiverse /
 specification-curve literature). A single team cannot recruit seventy analysts,
 but it can approximate the insight in-house with the four checks below.
 
-## The inference regime — few subjects, sampled deeply
+## Declare the inference regime (per project)
 
-This lab runs a **low-n, high-trial** design: a handful of "thoroughbred" subjects
-each sampled to the hilt (thousands of trials / stimuli per subject), in the
-**psychophysics / non-human-primate** tradition — *not* a 50-subject
-cognitive-neuroscience study. That tradition has produced far more reproducible
-results than large-n / few-trial designs, and it changes what inference looks like
-here. Read the four checks below through this lens:
+The right inference follows from the project's **data regime**, which is a **per-project choice — not a
+lab-wide constant** — and must be **declared up front in the project's `CLAUDE.md`**. Two regimes recur:
 
-- **The unit of evidence is the individual subject.** Power comes from the
-  *within-subject* trial count, not the subject count. Establish an effect within a
-  subject with a **resampling test over trials / stimuli** (permutation or
-  bootstrap) — that is where the degrees of freedom actually are.
-- **Reproducibility = consistency across the few subjects.** Show **every subject
-  individually** (n = 6 → six lines/points, each with its within-subject error); the
-  endpoint is "*k of N* subjects show it, each within-subject reliable", not a pooled
-  group statistic. With a handful of deeply-sampled subjects the individual
-  replications are the strong evidence; a group t-test is the weak version.
-- **Do NOT multiple-comparison-correct across a descriptive sweep.** Pushing 27 ROIs
-  (or a whole-brain map) through Bonferroni / BH at n = 6 is self-defeating and
-  conceptually wrong: a hierarchy / ROI *profile* is a characterization, not a family
-  of independent hypotheses to be guarded. Report effect sizes, within-subject CIs,
-  and cross-subject consistency across the sweep. Reserve formal correction for a
-  genuinely pre-registered confirmatory family, and prefer a few **a-priori
-  endpoints** over a corrected fishing expedition.
-- **The multiverse and controls below still apply** — but per subject and as
-  consistency across subjects, not as a group-level correction exercise.
+- **(A) Low-n / high-trial** (psychophysics / non-human-primate): a few subjects each sampled to the
+  hilt (thousands of trials / stimuli). This tradition has produced highly reproducible results; power
+  is **within** subject and the individual subject is the unit of evidence.
+- **(B) Population-level** (large-n cognitive neuroscience / individual-differences): many subjects,
+  fewer trials each. Power is **across** subjects and the group is the unit.
 
-*Why:* deep within-subject sampling makes each subject a high-precision replication,
-so the reproducibility question is "does it replicate across these few?", which
-individual-subject display answers directly. Blanket multiple-comparison correction
-over a low-n descriptive sweep mostly destroys power for no inferential gain — it
-guards a family-wise error rate for a family you are not testing.
+The four checks below apply to **both**; what differs is the unit of evidence and how a claim is made:
+
+**Regime A — low-n / high-trial:**
+- Establish an effect **within a subject** with a resampling test over trials / stimuli (permutation or
+  bootstrap) — that is where the degrees of freedom are.
+- **Reproducibility = consistency across the few subjects:** show **every subject individually**
+  (n = 6 → six lines/points, each with its within-subject error); the endpoint is "*k of N* subjects
+  show it, each within-subject reliable", not a pooled group statistic.
+- **Do NOT multiple-comparison-correct a descriptive sweep.** Pushing 27 ROIs (or a whole-brain map)
+  through Bonferroni / BH at n = 6 is self-defeating: a hierarchy / ROI *profile* is a characterization,
+  not a family of independent hypotheses to be guarded. Report effect sizes, within-subject CIs, and
+  cross-subject consistency; reserve correction for a pre-registered confirmatory family and prefer a
+  few **a-priori endpoints**.
+
+**Regime B — population-level:**
+- The **group test is primary**; control multiple comparisons over the tested family (FDR / FWE) as
+  usual. Individual-subject display is still good practice, but the inference is group-level.
+
+*Why:* the two designs invert what carries the claim — within-subject replication across a few subjects
+vs a group estimate over many — so the same statistic that is right for one is wrong for the other.
+Stating the regime up front tells reviewers and future-you which logic is in play, and stops a low-n
+project from being held to a population-level multiple-comparison standard that would destroy its power
+for no inferential gain.
 
 ## Check 1 — the multiverse-lite sweep
 

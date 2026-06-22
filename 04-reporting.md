@@ -39,16 +39,17 @@ immediately beside it:
 9. **Named outcome, not bare absence** — a null is reported as *equivalence*,
    *underpowered*, or *true null*, distinguished, never as "nothing here".
 
-## Few subjects, sampled deeply (this lab's regime)
+## Match reporting to the project's inference regime
 
-For the lab's low-n / high-trial design (`02-inferential-robustness.md`): show
-**every subject individually** rather than only a group mean — with a handful of
-deeply-sampled subjects the individual replications *are* the evidence. The error
-bar of first resort is **within-subject** (a trial / stimulus resampling CI); the
-replication statement is cross-subject **consistency** (*k of N* subjects, each
-within-subject reliable). Do not collapse a low-n descriptive ROI / voxel sweep to a
-single multiple-comparison-corrected group *p* — report the profile with its
-per-subject spread instead.
+The reporting unit depends on the project's **declared regime**
+(`02-inferential-robustness.md`). For a **low-n / high-trial** project: show **every subject
+individually** rather than only a group mean — the individual replications *are* the evidence; the
+error bar of first resort is **within-subject** (a trial / stimulus resampling CI); the replication
+statement is cross-subject **consistency** (*k of N*, each within-subject reliable); and a low-n
+descriptive ROI / voxel sweep is **not** collapsed to a single multiple-comparison-corrected group
+*p* — report the profile with its per-subject spread. For a **population-level** project the group
+estimate with its multiple-comparison control is the headline, with individual-subject display as
+support.
 
 ## Provisional framing carries into prose
 
@@ -89,6 +90,6 @@ The second form is longer on purpose. "Elaborate over terse" is the standard.
 - [ ] Absolute *and* normalized views where one hides what the other shows.
 - [ ] Caveats shown and quantified, not used to delete the effect.
 - [ ] Nulls reported as named outcomes.
-- [ ] Few-subject regime: individual subjects shown; within-subject error + cross-subject consistency; no MC over a descriptive sweep.
+- [ ] Reporting matches the project's declared regime (low-n: individuals + within-subject error + consistency, no MC over a sweep; population-level: group estimate + MC).
 - [ ] Provenance (commit/date/dataset) attached.
 - [ ] Framed as a candidate reading with the call deferred to the user.
