@@ -1,4 +1,4 @@
-# 12 — Storage budget (what to save vs recompute)
+# 15 — Storage budget (what to save vs recompute)
 
 Every derived artifact sits between two failure modes, and the convention must guard both at
 once: **under-saving** (you discard something expensive that turns out to feed a spin-off, a
@@ -54,7 +54,7 @@ whole convention, so it is unconditional.
 - **Always write the recipe.** Every persisted product carries enough to regenerate it: the git
   commit, the params/config, the `random_state`/seed, and the identities of its inputs (paths +
   their own provenance, or content hashes). For netCDF/parquet products the format helper
-  (`11-data-formats.md`) already stamps `git_commit`/`created_utc`/`creator`; **add `params`,
+  (`14-data-formats.md`) already stamps `git_commit`/`created_utc`/`creator`; **add `params`,
   `seed`, and `inputs`** as extra attributes for simple cases, or a sidecar `*.recipe.json` for
   a complex config. A dropped artifact must be reconstructable from its recipe alone.
 - **float32 for voxel data.** Cast `float64` voxel maps to **float32** before storing — fMRI SNR
@@ -70,7 +70,7 @@ whole convention, so it is unconditional.
 
 ## Tiers and lifecycle
 
-Three tiers, mapped onto the project layout (`07-project-layout.md`):
+Three tiers, mapped onto the project layout (`12-project-layout.md`):
 
 | Tier | Where | Lifetime | For |
 |---|---|---|---|
@@ -95,7 +95,7 @@ and auto-purged); never leave a curated product there.
 - **Compression changes the ratio.** Evaluate the size threshold *after* float32 + chunked
   compression, not on the raw array.
 
-## When to deviate (see `09-when-to-deviate.md`)
+## When to deviate (see `16-when-to-deviate.md`)
 
 - A pipeline with a **long, fragile, or externally-rate-limited** stage may warrant checkpointing
   *every* step even when cheap-by-the-ratio, to bound restart cost.

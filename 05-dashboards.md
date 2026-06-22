@@ -1,4 +1,4 @@
-# 13 — Interpretation dashboards (juxtapose the result with its hypotheses)
+# 05 — Interpretation dashboards (juxtapose the result with its hypotheses)
 
 A result figure encodes *what* was found. It does not encode *what it means*, or *what else it could
 have been* — the reader is expected to supply those from memory. Interpreting a bare result is really
@@ -27,7 +27,7 @@ doc governs the **composition for interpretation** — pairing result with hypot
 
 ## Stance: surface, don't adjudicate
 
-A dashboard is the operational expression of **principle 5** (`00-principles.md`): *the analyst
+A dashboard is the operational expression of **principle 1** (`00-principles.md`): *the analyst
 surfaces, the user judges.* Its job is to make the evidence and the competing readings maximally
 legible and to leave the scientific call to the reader. Throughout the dashboard:
 
@@ -65,7 +65,7 @@ Three payoffs, all of which a cartoon forfeits:
 - **It doubles as a method validation.** If the idealized "rotation" data does not produce a visibly
   distinct plot, the analysis *cannot detect rotation* — and it is far better to learn that here than
   after a false claim. The synthetic generators that embody each hypothesis are the **same fixtures
-  that test the analysis** (`04-testing.md`): the planted-effect and null cases a good test suite
+  that test the analysis** (`09-testing.md`): the planted-effect and null cases a good test suite
   already builds are exactly the dashboard's schematics. Write them once; use them for both.
 
 ## Principle 2 — the dashboard is self-documenting
@@ -142,7 +142,7 @@ method was blind to.
       no hand-drawn cartoons.
 - [ ] The null and underpowered cases are among the schematics.
 - [ ] Concept, metric, and a *descriptive* reading are on the artifact; no external doc needed to read it.
-- [ ] The verdict is framed as candidate reading(s) and explicitly deferred to the user (principle 5).
+- [ ] The verdict is framed as candidate reading(s) and explicitly deferred to the user (principle 1).
 - [ ] Every caveated effect is shown and quantified, not dropped; absolute *and* relative views where one hides what the other shows.
 - [ ] Schematic generators are shared with the analysis's test fixtures.
 - [ ] Panel craft follows `skills/scientific-figures/`.

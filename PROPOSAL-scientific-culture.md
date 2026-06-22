@@ -1,8 +1,11 @@
 # Proposal — from a pipeline harness to a *how-to-do-science* harness
 
-**Status:** proposal for discussion. Nothing here is wired into the convention
-index yet. Each item is independently adoptable; pick a subset, reorder, or send
-back.
+**Status:** ✅ **accepted and implemented** (2026-06-22). The conventions were
+reorganized culture-first: nine principles in `00`, four new files (`01`
+doing-science-with-claude, `02` inferential-robustness, `03` analysis-log, `04`
+reporting), `05` dashboards, and the build files renumbered to `06`–`17`. This
+document is retained as the rationale-and-prior-art record; file numbers it cites
+below are *pre-reorg* and refer to the old layout.
 
 **Date:** 2026-06-22
 

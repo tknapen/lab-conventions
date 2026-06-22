@@ -1,4 +1,4 @@
-# 08 — Commands
+# 13 — Commands
 
 Every project ships a `justfile` with a standard set of targets. The vocabulary is shared across the lab so anyone (and Claude) can drop into any repo and run `just sync && just check` without reading the README.
 
@@ -7,7 +7,7 @@ Every project ships a `justfile` with a standard set of targets. The vocabulary 
 ## The canonical `justfile`
 
 ```just
-# justfile — see lab-conventions/08-commands.md
+# justfile — see lab-conventions/13-commands.md
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
 default:
@@ -74,6 +74,36 @@ pipeline cores="8":
 pipeline-slurm jobs="50":
     uv run snakemake --executor slurm --jobs {{jobs}} \
         --workflow-profile profiles/slurm
+
+# --- doing science -------------------------------------------------------
+
+# Append a stamped decision-log entry for an analysis (see 03-analysis-log.md).
+# Opens $EDITOR on docs/notes/<analysis>.log.md with a dated, commit-stamped header.
+log analysis:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    f="docs/notes/{{analysis}}.log.md"
+    mkdir -p "$(dirname "$f")"
+    {
+      echo ""
+      echo "## $(date -u +%Y-%m-%d) · commit $(git rev-parse --short HEAD) · exploratory"
+      echo ""
+      echo "**Question.** "
+      echo "**Decision.** "
+      echo "**Alternatives considered.** "
+      echo "**Why.** "
+      echo "**Ruled out.** "
+      echo "**Open questions.** "
+      echo "**Status.** Candidate reading: …  (the call is the user's)"
+    } >> "$f"
+    "${EDITOR:-nano}" "$f"
+
+# Run the inferential-robustness sweep for an analysis (see 02-inferential-robustness.md).
+# Expects a workflow/multiverse.smk parameterized over the analytic-choice axes;
+# emits a specification-curve figure under figures/<analysis>/.
+multiverse analysis cores="8":
+    uv run snakemake -s workflow/multiverse.smk \
+        --config analysis={{analysis}} --cores {{cores}}
 
 # --- docs ----------------------------------------------------------------
 

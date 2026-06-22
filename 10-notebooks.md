@@ -1,4 +1,4 @@
-# 05 — Notebooks
+# 10 — Notebooks
 
 ## Marimo is the default
 
@@ -16,7 +16,20 @@ A notebook cell does one of:
 
 If a cell has more than ~30 lines of logic, that logic gets extracted to `src/`. A good notebook reads like an outline of the analysis, not the analysis itself.
 
-*Why:* code in `src/` is testable, importable, and reusable. Code stuck in a notebook cell is none of those. See principle 3 in `00-principles.md`.
+*Why:* code in `src/` is testable, importable, and reusable. Code stuck in a notebook cell is none of those. See principle 8 in `00-principles.md`.
+
+## Look at the data first (principle 3)
+
+The **first substantive cell** of any analysis notebook plots the *raw data* — the per-trial / per-voxel / per-subject distribution, not a summary. Histograms, a strip/swarm of the points, residuals, missingness, the range and the outliers. Only after that cell do summary statistics, fits, or tests appear.
+
+```python
+# Cell 1 (after imports): look before you summarize.
+raw = load_subject(sub)            # from src/
+viz.distributions(raw)             # per-trial points, not the mean
+viz.missingness(raw)               # what's absent, before it silently biases a mean
+```
+
+*Why:* Anscombe's quartet and the Datasaurus dozen — identical mean / variance / correlation, completely different data. A summary computed before the distribution is seen is an assertion, not evidence (principle 3 in `00-principles.md`). A notebook that opens with a `.mean()` has skipped the most informative step.
 
 ## Hard rules
 

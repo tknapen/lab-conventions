@@ -1,4 +1,4 @@
-# 03 — Code quality
+# 08 — Code quality
 
 ## Lint and format: Ruff, no exceptions
 
