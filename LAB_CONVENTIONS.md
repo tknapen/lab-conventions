@@ -34,6 +34,7 @@ Vendor `lab-conventions/` into projects via git submodule, git subtree, or a sym
 | `10-release.md` | Optional. Read only when releasing a project (PyPI, JOSS, Zenodo). |
 | `11-data-formats.md` | Intermediate/derived file formats: netCDF + parquet, never `.npy`/`.pkl`. |
 | `12-storage-budget.md` | What to save vs recompute: reproducibility gate, cost ratio, tiers, recipes. |
+| `13-dashboards.md` | Interpretation dashboards: juxtapose the result with hypothesis schematics (same plot fn, idealized data) + self-documenting text. |
 
 ## Versioning
 
