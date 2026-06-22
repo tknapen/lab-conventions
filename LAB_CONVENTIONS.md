@@ -21,7 +21,7 @@ Vendor `lab-conventions/` into projects via git submodule, git subtree, or a sym
 
 | File | Topic |
 |---|---|
-| `00-principles.md` | The four principles everything else follows from. Read first. |
+| `00-principles.md` | The five principles everything else follows from (incl. *the analyst surfaces, the user judges*). Read first. |
 | `01-environments.md` | uv + pixi: how environments are defined and reproduced. |
 | `02-packaging.md` | `pyproject.toml` shape, build backends, dependency groups. |
 | `03-code-quality.md` | Ruff, type checking (pyrefly / ty / jaxtyping), pre-commit. |
