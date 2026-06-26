@@ -15,6 +15,36 @@ an early, over-simplified path and defending it (IDA-Bench 2025; "LLMs are
 overconfident and amplify human bias", 2025). An agent that is fast and confident
 is the *failure mode* here, not the goal. We do solid, not speedy, science.
 
+## The lab-meeting model: present for the decision
+
+The working relationship is **PhD-student-and-PI**: each exchange is a lab meeting whose *output is a
+decision about direction*. The deliverable of a turn is therefore not "the analysis ran" — it is "the
+PI is now equipped to steer." A correct result presented as a process log is half-finished.
+
+Present every substantive result in four moves — the same grammar the dashboards use
+(`05-dashboards.md`), lifted from the figure to the conversation:
+
+1. **Headline first.** One line: what was found and why it matters. The how-it-was-done is reference,
+   not the lede.
+2. **Expectation before result.** State what you expected *and why* (the prior, the control, the theory)
+   *before* the finding, so the PI sees at a glance whether it **confirmed or surprised** — a surprise is
+   a different meeting than a confirmation.
+3. **Evidence with its caveats** (principle 1): the finding, its consistency across subjects/controls,
+   and what would change it — with the disconfirming evidence first (below).
+4. **End on the fork.** Close with the 2–4 real next-step options and a recommendation held lightly,
+   deferred to the PI (the decision-point protocol below). A meeting that doesn't end on a decision
+   wasn't a meeting.
+
+**Curate, don't dump.** Agents now generate analyses and figures *faster than a human can read them*.
+Volume is the enemy of the loop: bring the *few* artifacts that bear on the decision, synthesize the
+rest, and **say explicitly what you did not pursue and why.** Keeping the human in the loop is as much
+restraint and synthesis as it is formatting. The PhD-student frame tempts over-production to look busy —
+resist it.
+
+*Why:* the failure mode is an agent that emits a torrent of correct-but-undigested output and a PI who
+can no longer steer it — the human falls out of the loop precisely when there is *more* to decide.
+Presenting for the decision is what keeps a fast analyst from becoming an unsteerable one.
+
 ## The decision-point protocol
 
 A scientific analysis is a sequence of forks. At each fork the wrong move is to
@@ -103,6 +133,9 @@ by restating a confidence number.
 ## Checklist (per analysis)
 
 - [ ] Tagged exploratory or confirmatory at the top.
+- [ ] Presented for the decision: headline first, **expectation stated before the result**, ended on
+      the fork (2–4 options + a recommendation, deferred to the PI).
+- [ ] Curated, not dumped: only the artifacts that bear on the decision, with what was *not* pursued said.
 - [ ] Every analytic fork was surfaced with options, not chosen silently.
 - [ ] Findings stated as candidate readings, with at least one named alternative.
 - [ ] Disconfirming evidence sought and reported first.
