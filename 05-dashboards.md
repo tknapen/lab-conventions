@@ -135,6 +135,43 @@ A reader with no prior exposure sees immediately that the data sits on the *same
 and that "rotation" was a real, detectable alternative that did not occur, not a possibility the
 method was blind to.
 
+## The dashboard's home is a narrated notebook
+
+A dashboard's text panel is cramped — a paragraph, no equations, no citations. That under-serves the
+interpretive job the dashboard exists to do. The dashboard's real home is a **narrated results
+notebook** (marimo; `10-notebooks.md`): each headline analysis becomes a section that pairs its
+dashboard *and the cortical maps / raw views behind it* with the exposition a reader actually needs —
+the **concept**, the **equation(s)** that define the metric, the **references**, the stated
+*expectation (and why)*, and the **candidate reading**. The four "what does this mean" steps the
+dashboard renders *visually* are here also written *out*, at a length a cramped on-figure caption
+cannot hold.
+
+A standalone dashboard image is then a **build artifact** — an export for a slide or a PR — not the
+primary deliverable. The notebook is the source of truth for interpretation; the figure files are
+produced by a script that calls the *same* package functions (one source of truth, `10-notebooks.md`).
+Shipping the dashboards only as loose PDFs is *under-implementing the convention*: the schematics and a
+one-line verdict are there, but the reasoning, equations, and citations that make them legible are not.
+
+Rules (they inherit the thin-notebook rules and add the narration standard):
+
+- **Thin cells, rich markdown.** Every cell loads, calls a `src/` function (the dashboard, or a flatmap
+  / raw-view helper), and displays; *all* prose lives in `mo.md` cells. No analysis logic in the
+  notebook (principle 8) — the dashboard and its panels are package functions, tested independently.
+- **Elaborate, not terse** (the same stance as the on-figure text): write the *why* of the method, not
+  only the *what*. Equations belong here — marimo renders LaTeX in `mo.md` — and so do real citations.
+- **Surface, don't adjudicate.** The reading is a *candidate*, the call deferred to the user
+  (principle 1); every caveat (power, ceiling, confound) is stated next to its effect, never used to
+  delete it from view.
+- **Reproducible and cheap to refresh.** A provenance line (git hash) at the top; long renders cached
+  at the function level (`10-notebooks.md`); the whole document re-derives with one command as data
+  lands, so the narrated figures never drift from the results.
+- **Export on demand.** `marimo export html notebooks/<name>.py` produces a shareable, executed HTML;
+  wire it into the `justfile` so the HTML and any figure PDFs are *artifacts*, not maintained files.
+
+The litmus test: a reader six months out, or a collaborator with no prior exposure, opens the notebook
+and follows each claim from question → method (with its equation) → competing hypotheses (the schematic
+row) → the cortical map → the candidate reading — without needing a second document.
+
 ## Checklist
 
 - [ ] Headline analyses ship a dashboard, not a bare figure.
@@ -146,3 +183,6 @@ method was blind to.
 - [ ] Every caveated effect is shown and quantified, not dropped; absolute *and* relative views where one hides what the other shows.
 - [ ] Schematic generators are shared with the analysis's test fixtures.
 - [ ] Panel craft follows `skills/scientific-figures/`.
+- [ ] Headline dashboards live in a **narrated marimo notebook** — concept + equation(s) + references +
+      candidate reading around each figure, with the cortical maps / raw views beside the schematics.
+      Standalone figure files are *exports* of the same package functions, not the primary deliverable.

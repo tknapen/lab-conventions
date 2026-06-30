@@ -33,7 +33,7 @@ numbers track that priority — read low-to-high.
 | `02-inferential-robustness.md` | Declare the per-project inference regime (low-n/high-trial within-subject+consistency vs population-level group+MC); multiverse-lite sweeps, positive/negative controls, sensitivity analysis, blind-ish analysis. |
 | `03-analysis-log.md` | The append-only decision log: what was tried, chosen, ruled out, and why — legible months later. |
 | `04-reporting.md` | Interpretation-ready reporting of every result (prose, tables, chat), not just figures. |
-| `05-dashboards.md` | Interpretation dashboards: juxtapose the result with hypothesis schematics (same plot fn, idealized data) + self-documenting text. |
+| `05-dashboards.md` | Interpretation dashboards: juxtapose the result with hypothesis schematics (same plot fn, idealized data) + self-documenting text; their home is a **narrated marimo notebook** (concept + equations + refs + reading around each figure + the cortical maps). |
 
 ### How we build
 

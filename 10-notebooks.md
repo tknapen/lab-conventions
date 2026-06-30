@@ -18,6 +18,16 @@ If a cell has more than ~30 lines of logic, that logic gets extracted to `src/`.
 
 *Why:* code in `src/` is testable, importable, and reusable. Code stuck in a notebook cell is none of those. See principle 8 in `00-principles.md`.
 
+## Two kinds of notebook
+
+An **analysis** notebook explores and decides — look-first, thin, the outline of a computation. A
+**results** notebook *communicates*: it is the home of the interpretation dashboards (`05-dashboards.md`).
+Each headline analysis is narrated — concept, the equation(s) defining the metric, references, and a
+candidate reading (deferred to the user) — wrapped around its dashboard and the cortical maps / raw views
+behind it. Both obey the thin-cell rule above; the results notebook *adds* the narration standard in
+`05-dashboards.md` ("The dashboard's home is a narrated notebook"). Standalone figure files are exports of
+the same `src/` functions, not the deliverable.
+
 ## Look at the data first (principle 3)
 
 The **first substantive cell** of any analysis notebook plots the *raw data* — the per-trial / per-voxel / per-subject distribution, not a summary. Histograms, a strip/swarm of the points, residuals, missingness, the range and the outliers. Only after that cell do summary statistics, fits, or tests appear.
