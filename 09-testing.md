@@ -79,16 +79,10 @@ def synthetic_bids(tmp_path_factory):
 ### Control tests — can the method detect (and not invent) the effect?
 
 The synthetic generators that embody each hypothesis double as tests, dashboard
-schematics (`05-dashboards.md`), and inferential controls (`02-inferential-robustness.md`).
-Write them once; use them three times. Two kinds, both required for any analysis
-that carries a headline claim:
-
-- **Positive control** — feed data with a *planted* effect and assert the analysis
-  recovers it. If the planted effect does not come back, the method cannot detect
-  the real one, and a null from it is uninterpretable.
-- **Negative control** — feed label-shuffled / phase-scrambled / pure-noise data and
-  assert the analysis returns the null. If an effect appears here, the pipeline
-  manufactures it — a false-positive factory.
+schematics (`05`), and inferential controls (`02`, Check 2, which owns the concept:
+a **positive control** the method must recover, a **negative control** it must
+return null on). Write once, use three times. Both are required for any headline
+claim; here they are as tests:
 
 ```python
 def test_detects_planted_effect(rng):
@@ -101,11 +95,9 @@ def test_null_under_label_shuffle(rng):
     assert abs(np.mean(null)) < 0.02               # negative control stays flat
 ```
 
-*Why:* a test suite that only checks "the code runs" cannot tell signal from
-artifact. Planted-effect and shuffled-null cases are the statistical sanity checks —
-the positive control proves a null is a true absence rather than a broken method;
-the negative control defines the noise floor (Wilson et al., "Good enough practices
-in scientific computing"). They are the same fixtures `02` and `05` rely on.
+*Why:* a suite that only checks "the code runs" can't tell signal from artifact — the
+planted-effect (positive) and shuffled-null (negative) cases are the statistical
+sanity checks (`REFERENCES.md`), and the same fixtures `02` and `05` rely on.
 
 ### Numerical tolerance
 

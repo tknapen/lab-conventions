@@ -1,127 +1,84 @@
 # 05 — Interpretation dashboards (juxtapose the result with its hypotheses)
 
-A result figure encodes *what* was found. It does not encode *what it means*, or *what else it could
-have been* — the reader is expected to supply those from memory. Interpreting a bare result is really
-four steps the reader does in their head: (a) recall the analysis logic, (b) hold the competing
-hypotheses, (c) simulate each hypothesis's visual signature, (d) match the data to the nearest one.
-Steps (b)–(d) are exactly where a result gets misread, and where anyone not already fluent in the
-analysis is locked out — including the author six months later.
+A bare result figure encodes *what* was found, not *what it means* or *what else it
+could have been* — the reader supplies those from memory, which is exactly where a
+result gets misread (including by the author six months later).
 
-The reframe that fixes this:
-
-> A bare result figure asks the reader to **simulate the alternatives in their head**. A dashboard
-> **renders** them — each through the *same plot function* as the result — so "which world is this?"
-> becomes a visual match instead of a feat of memory.
+> A bare result figure asks the reader to **simulate the alternatives in their
+> head**. A dashboard **renders** them — each through the *same plot function* as the
+> result — so "which world is this?" becomes a visual match, not a feat of memory.
 
 ## The standard
 
-Every **headline** analysis — one whose result enters a paper, a decision, or a go/no-go breakpoint —
-ships an **interpretation dashboard**, not a bare figure. A dashboard is the result plot placed in
-direct juxtaposition with (1) schematic plots of what each competing hypothesis would look like and
-(2) self-contained text explaining the concept, the metric, and the verdict. Exploratory and
-intermediate plots are exempt; the dashboard is for the figures that carry a claim.
+Every **headline** analysis (result enters a paper, a decision, or a go/no-go) ships an **interpretation
+dashboard**, not a bare figure: the result plot in direct juxtaposition with (1) schematic plots of what
+each competing hypothesis would look like and (2) self-contained text — concept, metric, verdict.
+Exploratory and intermediate plots are exempt.
 
-This convention sits **on top of** the scientific-figures skill (`skills/scientific-figures/`): that
-skill governs the craft of each individual panel (spines, palette, annotation, physical size); this
-doc governs the **composition for interpretation** — pairing result with hypotheses and prose.
+This sits **on top of** the scientific-figures skill (`skills/scientific-figures/`, panel craft) and is
+the operational expression of **principle 1** (`00`, surface don't adjudicate): the dashboard makes the
+evidence and competing readings legible and leaves the call to the reader — readings framed as *candidates*
+("the call is yours"), caveats shown next to their effect (never used to delete it), absolute *and*
+normalized views where one hides what the other shows.
 
-## Stance: surface, don't adjudicate
+## Principle 1 — schematics come from the *result's own plot function*, fed idealized data
 
-A dashboard is the operational expression of **principle 1** (`00-principles.md`): *the analyst
-surfaces, the user judges.* Its job is to make the evidence and the competing readings maximally
-legible and to leave the scientific call to the reader. Throughout the dashboard:
+The load-bearing rule. For each competing hypothesis, **synthesize idealized data that embodies it** and
+push it through the **exact plot function** used for the real result — never a hand-drawn cartoon. Payoffs a
+cartoon forfeits:
 
-- **Report patterns and gradients descriptively; do not collapse to a single strict verdict.** Where a
-  reading is offered, frame it as a *candidate* and make the deferral explicit ("the call is yours").
-  Show the plausible readings side by side — which the hypothesis-schematic row already does by
-  construction, so this stance and this format reinforce each other.
-- **Quantify, don't dismiss.** A caveat (low ceiling, low power, a confound) is shown and weighed —
-  never used to delete an effect from view. The canonical failure this guards against: labelling an
-  elevated-but-low-ceiling effect "underpowered noise" and dropping it, when it may be the signal the
-  user most wants. State the caveat next to the effect and let the reader weigh it.
-- **Show both absolute and normalized/relative views** whenever one hides structure the other reveals
-  (e.g. a small absolute effect that is a large *fraction* of a collapsed ceiling).
-- **Elaborate over terse.** Reference/chance/ceiling lines, in-panel effect annotations, stated
-  n / error / test — the opposite of the sparse single-metric plot. More interpretation-facilitating
-  information is the goal, not minimalism.
-
-The "honest nulls" rule below — distinguishing a null from an underpowered or an equivalent result —
-is part of the same stance. None of this is a licence to overclaim: the discipline is to surface
-*everything with its caveats*, which is simultaneously less dismissive and more honest.
-
-## Principle 1 — hypothesis schematics come from the *same plot function*, fed idealized data
-
-This is the load-bearing rule. For each competing hypothesis, **synthesize idealized data that embodies
-it** and push that data through the **exact plot function** used for the real result. Never hand-draw a
-cartoon of "what rotation would look like."
-
-Three payoffs, all of which a cartoon forfeits:
-
-- **Comparability.** Same axes, same encoding, same scale, same colour semantics as the result, so the
-  reader pattern-matches directly instead of translating between a stylised cartoon and real data.
-- **Honesty.** The schematic shows what the analysis *would actually render* under that hypothesis —
-  including its noise, its ceiling, its power limits — not an idealised fiction that the method could
-  never produce.
-- **It doubles as a method validation.** If the idealized "rotation" data does not produce a visibly
-  distinct plot, the analysis *cannot detect rotation* — and it is far better to learn that here than
-  after a false claim. The synthetic generators that embody each hypothesis are the **same fixtures
-  that test the analysis** (`09-testing.md`): the planted-effect and null cases a good test suite
-  already builds are exactly the dashboard's schematics. Write them once; use them for both.
+- **Comparability** — same axes, encoding, scale, colour semantics as the result, so the reader
+  pattern-matches directly.
+- **Honesty** — the schematic shows what the analysis *would actually render* under that hypothesis,
+  including its noise and ceiling, not an idealised fiction.
+- **Method validation** — if idealized "rotation" data doesn't produce a visibly distinct plot, the
+  analysis *cannot detect rotation*; better to learn that here than after a false claim. These generators
+  are the **same fixtures that test the analysis** (`09`) — write once, use for both.
 
 ## Principle 2 — the dashboard is self-documenting
 
-A dashboard must be legible to someone who has never seen the analysis. It carries, in prose on the
-figure or page:
-
-- the **concept** — what is being tested and why, in plain language;
-- the **metric definitions** — what each axis/quantity is, and its assumptions and ceilings;
-- an **auto-derived verdict** — which hypothesis the result matches, computed from the data (e.g. a
-  classifier that returns `same_operator` / `rotation` / `underpowered`), not asserted by hand.
-
-If reading the dashboard requires an external methods section, it is not done.
+Legible to someone who has never seen the analysis. It carries, in prose on the figure or page: the
+**concept** (what is tested and why), the **metric definitions** (each axis/quantity, its assumptions and
+ceilings), and an **auto-derived verdict** computed from the data (e.g. a classifier returning
+`same_operator` / `rotation` / `underpowered`), not asserted by hand. If reading it needs an external
+methods section, it is not done.
 
 ## Principle 3 — show the honest nulls
 
-The hypothesis row **must include the null and the underpowered / uninformative cases**, rendered the
-same way as the live hypotheses. This is what lets a null result read as a *positive match to a named
-world* ("same operator", "no penalty", "underpowered") rather than as an absence or a failure. A
-dashboard that only shows the exciting hypotheses next to a flat result invites the reader to see
-"nothing" instead of "equivalence" — the single most common scientific misreading, and the one this
-convention exists to prevent. Distinguishing *equivalence* from *failure-to-reject* and from
-*underpowered* is a first-class job of the schematic row.
+The hypothesis row **must include the null and the underpowered / uninformative cases**, rendered like the
+live hypotheses. This is what lets a null read as a *positive match to a named world* ("same operator",
+"underpowered") rather than an absence — distinguishing *equivalence* from *failure-to-reject* from
+*underpowered* is a first-class job of the schematic row, and the single most common misreading this
+convention prevents.
 
-## Layout
+## Layout and process
 
-- The **hypothesis schematics** as a row (or column) — the menu of possible worlds — directly
-  adjacent to the **result** in the identical encoding.
-- **Concept/metric text** alongside; the **verdict** highlighted.
-- Reading path: *possibilities → reality → reading*. Order the schematics so the eye travels through
-  them in the order the argument considers them (e.g. strongest-claim first, null last, or
-  hierarchy-ordered).
-- Panel-letter and house-style rules are the scientific-figures skill's job; apply them here too.
+Hypothesis schematics as a row (the menu of possible worlds) directly adjacent to the **result** in the
+identical encoding; concept/metric text alongside; the verdict highlighted. Reading path: *possibilities →
+reality → reading*, ordered as the argument considers them. For each headline analysis: (1) enumerate the
+competing hypotheses incl. null and underpowered, each with a one-line meaning; (2) write one generator per
+hypothesis → the result plot function → a schematic (reuse the test fixtures); (3) render the real data
+through the same function; (4) compose schematic row + result + concept text + auto-verdict.
 
-## The process (and what it produces)
+## The dashboard's home is a narrated notebook
 
-For each headline analysis:
-
-1. **Enumerate the competing hypotheses**, including the null and the underpowered case, each with a
-   one-line meaning. (This is the "interpretation guide" table many analyses already write — make it
-   executable.)
-2. **Write one generator per hypothesis**: idealized data → the result plot function → a schematic.
-   Reuse the analysis's test fixtures.
-3. **Render the real data** through the same plot function → the result panel.
-4. **Compose** schematic row + result + concept text + auto-verdict into one artifact.
-
-**Format.** A single composed vector figure (PDF + SVG) for papers and slides, and/or an HTML page for
-exploration — both driven by the *same* generators, never a separately maintained mockup. Save under
-`figures/<analysis>/dashboard.{pdf,svg,html}`. The hypothesis generators live in the analysis's plot
-module (or its tests); the composer is a thin, reusable layout helper, not bespoke per analysis.
+An on-figure text panel is cramped — no equations, no citations. The dashboard's real home is a **narrated
+results notebook** (marimo; `10`): each headline analysis becomes a section pairing its dashboard *and the
+cortical maps / raw views behind it* with the concept, the metric **equation(s)** (marimo renders LaTeX),
+the **references**, the stated expectation, and the candidate reading — the "what does this mean" steps the
+dashboard renders *visually*, also written out. A standalone dashboard image is then a **build artifact**
+(a slide/PR export produced by a script calling the *same* `src/` functions), not the primary deliverable;
+shipping only loose PDFs under-implements the convention. It inherits the thin-notebook rules (`10`): thin
+cells, all prose in `mo.md`, no analysis logic in the notebook, a provenance line at the top, cached long
+renders, `marimo export html` wired into the `justfile`. Litmus test: a reader six months out follows each
+claim question → method (with equation) → competing hypotheses (schematic row) → cortical map → candidate
+reading, with no second document.
 
 ## Worked example — the forward/backward covariance rotation test
 
-The question "are the forward and backward second-moment representations the *same operator*, a
-*rotation*, or *independent*?" has four named worlds. Each is one small synthetic covariance pair fed
-to the same alignment-vs-ceiling plot used for the real result:
+"Are the forward and backward second-moment representations the *same operator*, a *rotation*, or
+*independent*?" — four named worlds, each one small synthetic covariance pair fed to the same
+alignment-vs-ceiling plot as the real result:
 
 | Hypothesis | Idealized data | Schematic signature |
 |---|---|---|
@@ -130,59 +87,19 @@ to the same alignment-vs-ceiling plot used for the real result:
 | Independent | different spectrum and eigenvectors | cross and ceiling both low/divergent |
 | Underpowered | near-chance ceiling (weak signal) | ceiling ≈ chance floor; no verdict possible |
 
-The dashboard renders these four signatures beside the real cohort line and the auto-derived verdict.
-A reader with no prior exposure sees immediately that the data sits on the *same-operator* template —
-and that "rotation" was a real, detectable alternative that did not occur, not a possibility the
-method was blind to.
-
-## The dashboard's home is a narrated notebook
-
-A dashboard's text panel is cramped — a paragraph, no equations, no citations. That under-serves the
-interpretive job the dashboard exists to do. The dashboard's real home is a **narrated results
-notebook** (marimo; `10-notebooks.md`): each headline analysis becomes a section that pairs its
-dashboard *and the cortical maps / raw views behind it* with the exposition a reader actually needs —
-the **concept**, the **equation(s)** that define the metric, the **references**, the stated
-*expectation (and why)*, and the **candidate reading**. The four "what does this mean" steps the
-dashboard renders *visually* are here also written *out*, at a length a cramped on-figure caption
-cannot hold.
-
-A standalone dashboard image is then a **build artifact** — an export for a slide or a PR — not the
-primary deliverable. The notebook is the source of truth for interpretation; the figure files are
-produced by a script that calls the *same* package functions (one source of truth, `10-notebooks.md`).
-Shipping the dashboards only as loose PDFs is *under-implementing the convention*: the schematics and a
-one-line verdict are there, but the reasoning, equations, and citations that make them legible are not.
-
-Rules (they inherit the thin-notebook rules and add the narration standard):
-
-- **Thin cells, rich markdown.** Every cell loads, calls a `src/` function (the dashboard, or a flatmap
-  / raw-view helper), and displays; *all* prose lives in `mo.md` cells. No analysis logic in the
-  notebook (principle 8) — the dashboard and its panels are package functions, tested independently.
-- **Elaborate, not terse** (the same stance as the on-figure text): write the *why* of the method, not
-  only the *what*. Equations belong here — marimo renders LaTeX in `mo.md` — and so do real citations.
-- **Surface, don't adjudicate.** The reading is a *candidate*, the call deferred to the user
-  (principle 1); every caveat (power, ceiling, confound) is stated next to its effect, never used to
-  delete it from view.
-- **Reproducible and cheap to refresh.** A provenance line (git hash) at the top; long renders cached
-  at the function level (`10-notebooks.md`); the whole document re-derives with one command as data
-  lands, so the narrated figures never drift from the results.
-- **Export on demand.** `marimo export html notebooks/<name>.py` produces a shareable, executed HTML;
-  wire it into the `justfile` so the HTML and any figure PDFs are *artifacts*, not maintained files.
-
-The litmus test: a reader six months out, or a collaborator with no prior exposure, opens the notebook
-and follows each claim from question → method (with its equation) → competing hypotheses (the schematic
-row) → the cortical map → the candidate reading — without needing a second document.
+Rendered beside the real cohort line and the auto-verdict, a reader sees the data sits on the
+*same-operator* template — and that "rotation" was a real, detectable alternative that did not occur, not a
+possibility the method was blind to.
 
 ## Checklist
 
 - [ ] Headline analyses ship a dashboard, not a bare figure.
-- [ ] Every hypothesis schematic is generated by the *result's own plot function* fed idealized data —
-      no hand-drawn cartoons.
+- [ ] Every schematic is generated by the *result's own plot function* fed idealized data — no cartoons.
 - [ ] The null and underpowered cases are among the schematics.
-- [ ] Concept, metric, and a *descriptive* reading are on the artifact; no external doc needed to read it.
-- [ ] The verdict is framed as candidate reading(s) and explicitly deferred to the user (principle 1).
-- [ ] Every caveated effect is shown and quantified, not dropped; absolute *and* relative views where one hides what the other shows.
-- [ ] Schematic generators are shared with the analysis's test fixtures.
+- [ ] Concept, metric, and a *candidate* reading are on the artifact; no external doc needed to read it.
+- [ ] The verdict is framed as candidate reading(s), deferred to the user (principle 1); caveats shown and
+      quantified, not dropped; absolute *and* relative views where one hides what the other shows.
+- [ ] Schematic generators are shared with the analysis's test fixtures (`09`).
 - [ ] Panel craft follows `skills/scientific-figures/`.
-- [ ] Headline dashboards live in a **narrated marimo notebook** — concept + equation(s) + references +
-      candidate reading around each figure, with the cortical maps / raw views beside the schematics.
-      Standalone figure files are *exports* of the same package functions, not the primary deliverable.
+- [ ] Dashboards live in a **narrated marimo notebook** (concept + equation(s) + references + candidate
+      reading around each figure); standalone figure files are *exports* of the same functions.

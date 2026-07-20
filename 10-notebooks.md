@@ -21,12 +21,10 @@ If a cell has more than ~30 lines of logic, that logic gets extracted to `src/`.
 ## Two kinds of notebook
 
 An **analysis** notebook explores and decides — look-first, thin, the outline of a computation. A
-**results** notebook *communicates*: it is the home of the interpretation dashboards (`05-dashboards.md`).
-Each headline analysis is narrated — concept, the equation(s) defining the metric, references, and a
-candidate reading (deferred to the user) — wrapped around its dashboard and the cortical maps / raw views
-behind it. Both obey the thin-cell rule above; the results notebook *adds* the narration standard in
-`05-dashboards.md` ("The dashboard's home is a narrated notebook"). Standalone figure files are exports of
-the same `src/` functions, not the deliverable.
+**results** notebook *communicates*: it is the home of the interpretation dashboards, narrated with
+concept, metric equation(s), references, and a candidate reading. Both obey the thin-cell rule; the
+narration standard lives in `05` ("The dashboard's home is a narrated notebook"), and standalone figure
+files are exports of the same `src/` functions, not the deliverable.
 
 ## Look at the data first (principle 3)
 
@@ -39,7 +37,7 @@ viz.distributions(raw)             # per-trial points, not the mean
 viz.missingness(raw)               # what's absent, before it silently biases a mean
 ```
 
-*Why:* Anscombe's quartet and the Datasaurus dozen — identical mean / variance / correlation, completely different data. A summary computed before the distribution is seen is an assertion, not evidence (principle 3 in `00-principles.md`). A notebook that opens with a `.mean()` has skipped the most informative step.
+*Why:* principle 3 (`00`) — a summary computed before its distribution is seen is an assertion, not evidence (Anscombe / Datasaurus, `REFERENCES.md`). A notebook that opens with `.mean()` skipped the most informative step.
 
 ## Hard rules
 

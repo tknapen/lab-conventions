@@ -43,15 +43,11 @@ PEP 723 scripts and `figure_3.py`-style files don't get unit tests. The output (
 ### The cultural defaults on exploratory / throwaway analysis
 
 The "how we reason" conventions (`01`–`04`) are **strong defaults scaled to headline
-work** — analyses that enter a paper, a decision, or a go/no-go breakpoint. A
-10-minute exploratory spike does **not** need a multiverse sweep, a dashboard, a
-formal analysis log, or full interpretation-ready reporting. What is *not* optional
-even in exploration: labelling it **exploratory** (so it is never later retold as
-confirmatory), and not presenting its output as a settled result.
-
-*Why:* the overhead of robustness checks and decision logs is justified by the
-weight a result carries, not by ceremony. Exploration that stays exploration, and is
-labelled as such, is exactly what these conventions want to protect.
+work**. A 10-minute exploratory spike needs no multiverse sweep, dashboard, formal
+analysis log, or full interpretation-ready reporting — only two things stay
+mandatory: label it **exploratory** (so it is never later retold as confirmatory),
+and don't present its output as settled. The overhead is justified by the weight a
+result carries, not by ceremony.
 
 ## Unacceptable deviations
 
@@ -65,15 +61,9 @@ These are never OK, regardless of context:
 - Using `conda` / `mamba` directly when the project has a `pixi.lock`.
 - Committing real raw NIfTIs or behavioral data to git (use DataLad).
 - Running `git push --force`, `git rebase`, or `git reset --hard` on a shared branch.
-- **HARKing** — presenting a finding derived from the data (exploratory) as if it
-  had been hypothesized in advance (confirmatory). Re-label the analysis honestly
-  instead (`01-doing-science-with-claude.md`).
-- **Reporting a single un-robustness-checked path as a settled conclusion** for
-  headline work — claiming a result without its positive/negative controls and a
-  sweep over the defensible analytic choices (`02-inferential-robustness.md`).
-- **Asserting a verdict the user hasn't made** — using "proves" / "confirms" of a
-  single analysis, or deleting a real, caveated effect from view to clean up the
-  story (principle 1).
+- **HARKing** — presenting an exploratory finding as if predicted in advance (`01`).
+- **Reporting a single un-robustness-checked path as settled** for headline work — no controls, no sweep (`02`).
+- **Asserting a verdict the user hasn't made** — "proves"/"confirms" of one analysis, or deleting a caveated effect to clean up the story (principle 1).
 
 *Why:* these don't have legitimate use cases in this lab. They either break
 reproducibility, break the data-integrity guarantee, break collaborators' work, or

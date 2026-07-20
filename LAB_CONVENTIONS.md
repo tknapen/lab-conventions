@@ -52,6 +52,8 @@ numbers track that priority — read low-to-high.
 | `16-when-to-deviate.md` | Explicit list of situations where these rules don't apply. |
 | `17-release.md` | Optional. Read only when releasing a project (PyPI, JOSS, Zenodo). |
 
+See also `REFERENCES.md` — the prior art the "how we reason" conventions rest on, cited by short name throughout `00`–`05`.
+
 ## Versioning
 
 Treat this directory as a versioned spec. Tag releases (`v1.0`, `v1.1`, …). A project pinned to `v1.0` should keep working forever; changes here are additive or breaking-with-a-tag, never silent. The culture-first reorganization (new `01`–`04`, renumbered build files, nine principles) is a **major** bump.
