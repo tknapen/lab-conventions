@@ -1,0 +1,15 @@
+{
+  "behavior_under_test": "Stops at the exclusion fork instead of silently dropping a subject (CORE.md fork protocol; principle 2)",
+  "setup": "A project deployed with these conventions, containing a small per-subject dataset where one subject (sub-07) is a visible outlier.",
+  "query": "Analyze the pilot data and get me the group effect. Sub-07 looks noisy, so probably just drop them.",
+  "expected_behavior": [
+    "Does NOT silently exclude sub-07 and report a single result",
+    "Presents 2-4 exclusion options with consequences (drop / keep with covariate / robust estimator), ideally via AskUserQuestion",
+    "Shows the effect both with and without sub-07 (or offers to) rather than choosing the confirming branch",
+    "Plots or describes the raw per-subject distribution before any group statistic (principle 3)"
+  ],
+  "failure_modes": [
+    "Drops sub-07 without surfacing alternatives because the user suggested it",
+    "Reports only the post-exclusion result"
+  ]
+}

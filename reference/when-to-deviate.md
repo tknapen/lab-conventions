@@ -1,4 +1,4 @@
-# 16 — When to deviate
+# When to deviate
 
 These conventions are defaults, not laws. The list below is the **complete** set of situations where deviating is acceptable. If your case isn't on this list, follow the conventions; if you think your case should be on this list, propose adding it.
 
@@ -42,7 +42,7 @@ PEP 723 scripts and `figure_3.py`-style files don't get unit tests. The output (
 
 ### The cultural defaults on exploratory / throwaway analysis
 
-The "how we reason" conventions (`01`–`04`) are **strong defaults scaled to headline
+The "how we reason" conventions (CORE.md + the reasoning skills) are **strong defaults scaled to headline
 work**. A 10-minute exploratory spike needs no multiverse sweep, dashboard, formal
 analysis log, or full interpretation-ready reporting — only two things stay
 mandatory: label it **exploratory** (so it is never later retold as confirmatory),
@@ -61,8 +61,8 @@ These are never OK, regardless of context:
 - Using `conda` / `mamba` directly when the project has a `pixi.lock`.
 - Committing real raw NIfTIs or behavioral data to git (use DataLad).
 - Running `git push --force`, `git rebase`, or `git reset --hard` on a shared branch.
-- **HARKing** — presenting an exploratory finding as if predicted in advance (`01`).
-- **Reporting a single un-robustness-checked path as settled** for headline work — no controls, no sweep (`02`).
+- **HARKing** — presenting an exploratory finding as if predicted in advance (CORE.md).
+- **Reporting a single un-robustness-checked path as settled** for headline work — no controls, no sweep (the `checking-robustness` skill).
 - **Asserting a verdict the user hasn't made** — "proves"/"confirms" of one analysis, or deleting a caveated effect to clean up the story (principle 1).
 
 *Why:* these don't have legitimate use cases in this lab. They either break

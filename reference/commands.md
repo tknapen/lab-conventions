@@ -1,4 +1,4 @@
-# 13 — Commands
+# Commands
 
 Every project ships a `justfile` with a standard set of targets. The vocabulary is shared across the lab so anyone (and Claude) can drop into any repo and run `just sync && just check` without reading the README.
 
@@ -7,7 +7,7 @@ Every project ships a `justfile` with a standard set of targets. The vocabulary 
 ## The canonical `justfile`
 
 ```just
-# justfile — see lab-conventions/13-commands.md
+# justfile — see lab-conventions/reference/commands.md
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
 default:
@@ -77,7 +77,7 @@ pipeline-slurm jobs="50":
 
 # --- doing science -------------------------------------------------------
 
-# Append a stamped decision-log entry for an analysis (see 03-analysis-log.md).
+# Append a stamped decision-log entry for an analysis (see the logging-decisions skill).
 # Opens $EDITOR on docs/notes/<analysis>.log.md with a dated, commit-stamped header.
 log analysis:
     #!/usr/bin/env bash
@@ -98,7 +98,7 @@ log analysis:
     } >> "$f"
     "${EDITOR:-nano}" "$f"
 
-# Run the inferential-robustness sweep for an analysis (see 02-inferential-robustness.md).
+# Run the inferential-robustness sweep for an analysis (see the checking-robustness skill).
 # Expects a workflow/multiverse.smk parameterized over the analytic-choice axes;
 # emits a specification-curve figure under figures/<analysis>/.
 multiverse analysis cores="8":

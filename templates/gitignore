@@ -1,0 +1,16 @@
+__pycache__/
+*.egg-info/
+.venv/
+.pixi/
+.hypothesis/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+data/generated/
+# data/processed/ is regenerable; commit only if expensive AND small
+data/processed/
+logs/
+*.ipynb_checkpoints/
+.DS_Store

@@ -1,0 +1,41 @@
+[project]
+name = "myproject"
+description = "One-line description."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{ name = "Lab Member", email = "you@example.edu" }]
+dynamic = ["version"]
+dependencies = [
+  # runtime deps only
+  "numpy>=2.1",
+  "scipy>=1.14",
+  "nibabel>=5.3",
+  "pybids>=0.17",
+]
+
+[dependency-groups]
+test = ["pytest>=8", "pytest-xdist", "hypothesis", "syrupy", "beartype"]
+lint = ["ruff>=0.8"]
+typecheck = ["pyrefly>=1.0"]
+notebook = ["marimo>=0.10"]
+dev = [
+  { include-group = "test" },
+  { include-group = "lint" },
+  { include-group = "typecheck" },
+  { include-group = "notebook" },
+  "ipython",
+]
+
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.uv-dynamic-versioning]
+pattern = "default-unprefixed"
+
+# Tool sections live below: see reference/code-quality.md for ruff/pyrefly,
+# rules/testing.md for pytest, reference/environments.md for [tool.pixi].

@@ -1,4 +1,4 @@
-# 17 — Release
+# Release
 
 **Read this file only when actually releasing a project.** Day-to-day lab work doesn't need any of it.
 
@@ -19,7 +19,7 @@ A project ready for any release has, at minimum:
 - A `CITATION.cff` file at the repo root. GitHub renders it as a "Cite this repository" button; Zenodo and other tools parse it automatically.
 - A `CHANGELOG.md` (Keep-a-Changelog format) starting at version 0.1.0.
 - A `.zenodo.json` if depositing to Zenodo (controls authorship and metadata in the deposit).
-- All the lab conventions in `00-09` already satisfied (lockfiles committed, CI green, etc.).
+- All the core lab conventions already satisfied (lockfiles committed, CI green, etc.).
 
 *Why:* none of the release steps below work cleanly without these. A 6-month-old repo with no license blocks Zenodo, no `CITATION.cff` produces ugly citations, no `CHANGELOG` makes "what changed in v1.2" unanswerable.
 
@@ -188,7 +188,7 @@ Semantic versioning, strictly:
 - `PATCH` for bugfixes, no API changes.
 - `MINOR` for backwards-compatible new functionality.
 - `MAJOR` for breaking changes. Releases before `1.0.0` may break in minor versions — document it in `CHANGELOG.md`.
-- The version comes from the git tag via `uv-dynamic-versioning` (see `07-packaging.md`); never hardcode it.
+- The version comes from the git tag via `uv-dynamic-versioning` (see `reference/packaging.md`); never hardcode it.
 
 *Why:* downstream users pin via SemVer ranges (`^0.3` etc.); violating SemVer breaks their lockfiles silently. The lab will get bug reports either way; SemVer makes them about real bugs, not surprise breakage.
 

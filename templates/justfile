@@ -1,0 +1,121 @@
+# justfile — see lab-conventions/reference/commands.md
+set shell := ["bash", "-euo", "pipefail", "-c"]
+
+default:
+    @just --list
+
+# --- environment ---------------------------------------------------------
+
+# Sync the full environment (uv + pixi if present)
+sync:
+    @if [ -f pixi.lock ]; then pixi install --locked; fi
+    uv sync --locked
+
+# Update lockfiles (run when pyproject.toml changes)
+lock:
+    uv lock
+    @if [ -f pyproject.toml ] && grep -q '\[tool.pixi' pyproject.toml; then pixi install; fi
+
+# --- code quality --------------------------------------------------------
+
+lint:
+    uv run ruff check --fix
+    uv run ruff format
+
+typecheck:
+    uv run pyrefly check src
+
+# --- tests ---------------------------------------------------------------
+
+test *args:
+    uv run pytest {{args}}
+
+test-slow:
+    uv run pytest -m slow
+
+# --- notebooks -----------------------------------------------------------
+
+notebook name:
+    uv run marimo edit notebooks/{{name}}.py
+
+notebook-check:
+    uv run marimo check --strict notebooks/
+
+# Export marimo notebooks to .ipynb for collaborators (rare)
+notebook-export name:
+    uv run marimo export ipynb notebooks/{{name}}.py -o shared/{{name}}.ipynb
+
+# --- the gate ------------------------------------------------------------
+
+# Run everything CI runs. If this passes, you're done.
+check: lint typecheck test notebook-check
+    @echo "All checks passed."
+
+# --- pipelines -----------------------------------------------------------
+
+# Dry-run the workflow DAG
+pipeline-dry:
+    uv run snakemake -n
+
+# Run the workflow
+pipeline cores="8":
+    uv run snakemake --cores {{cores}} --use-apptainer
+
+# Submit the workflow to SLURM
+pipeline-slurm jobs="50":
+    uv run snakemake --executor slurm --jobs {{jobs}} \
+        --workflow-profile profiles/slurm
+
+# --- doing science -------------------------------------------------------
+
+# Append a stamped decision-log entry for an analysis (see the logging-decisions skill).
+# Opens $EDITOR on docs/notes/<analysis>.log.md with a dated, commit-stamped header.
+log analysis:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    f="docs/notes/{{analysis}}.log.md"
+    mkdir -p "$(dirname "$f")"
+    {
+      echo ""
+      echo "## $(date -u +%Y-%m-%d) · commit $(git rev-parse --short HEAD) · exploratory"
+      echo ""
+      echo "**Question.** "
+      echo "**Decision.** "
+      echo "**Alternatives considered.** "
+      echo "**Why.** "
+      echo "**Ruled out.** "
+      echo "**Open questions.** "
+      echo "**Status.** Candidate reading: …  (the call is the user's)"
+    } >> "$f"
+    "${EDITOR:-nano}" "$f"
+
+# Run the inferential-robustness sweep for an analysis (see the checking-robustness skill).
+# Expects a workflow/multiverse.smk parameterized over the analytic-choice axes;
+# emits a specification-curve figure under figures/<analysis>/.
+multiverse analysis cores="8":
+    uv run snakemake -s workflow/multiverse.smk \
+        --config analysis={{analysis}} --cores {{cores}}
+
+# --- docs ----------------------------------------------------------------
+
+docs:
+    quarto render docs/
+
+docs-preview:
+    quarto preview docs/
+
+# --- maintenance ---------------------------------------------------------
+
+# Clean caches and build artifacts. Does NOT touch data/.
+clean:
+    rm -rf .pytest_cache .ruff_cache .mypy_cache .hypothesis htmlcov dist build
+    find . -type d -name __pycache__ -exec rm -rf {} +
+
+# Install pre-commit hooks
+hooks:
+    uv run pre-commit install
+
+# Validate that pixi.lock and uv.lock match pyproject.toml
+verify-locks:
+    uv lock --check
+    @if [ -f pixi.lock ]; then pixi install --locked --dry-run; fi
