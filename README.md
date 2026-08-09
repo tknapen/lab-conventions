@@ -38,6 +38,25 @@ cd .. && ./lab-conventions/deploy.sh    # re-wires anything new; settings merge 
 git add lab-conventions && git commit -m "Pin lab-conventions to <new-tag>"
 ```
 
+## Migrating an existing (v2) project
+
+Projects whose `CLAUDE.md` was written against the pre-v3 numbered files
+(`00-principles.md` … `17-release.md`) need one extra step — the doctor tells you
+exactly what:
+
+1. Update the submodule to the v3 tag and run `./lab-conventions/deploy.sh`.
+   It will **FAIL** on a `CLAUDE.md` that doesn't import `CORE.md`, and **WARN**
+   about stale numbered references and superseded `Write()` deny entries.
+2. Splice `CLAUDE.md`: replace the old "Lab conventions" follow-block with the
+   single line `@lab-conventions/CORE.md` (keep all project-specific content) —
+   or run `/bootstrapping-project` in a Claude session and it performs the
+   splice, asks for your inference regime, and checks auto memory for stale
+   references (`/memory`).
+3. Re-run `./lab-conventions/deploy.sh --check` until green, confirm with
+   `/context` in a fresh session, and commit the pin + spliced files.
+
+The old→new file map lives in `LAB_CONVENTIONS.md`.
+
 ## Design (why this shape)
 
 Per Anthropic's context-engineering and skill-authoring guidance: always-on

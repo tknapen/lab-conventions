@@ -89,11 +89,29 @@ PYEOF
 fi
 
 # 5) Doctor — always runs
+WARN=(); MIGRATION=0
 check() { # $1 label $2 command
   if eval "$2" >/dev/null 2>&1; then PASS+=("$1"); else FAIL+=("$1"); fi
 }
 check "conventions vendored"        "[ -f '$CONV_DIR/CORE.md' ]"
-check "CLAUDE.md imports CORE"      "grep -q '@$CONV_NAME/CORE.md' CLAUDE.md"
+
+# CLAUDE.md must import the always-on core (v2 projects point at the old numbered files instead)
+if grep -q "@$CONV_NAME/CORE.md" CLAUDE.md 2>/dev/null; then
+  PASS+=("CLAUDE.md imports CORE.md")
+else
+  FAIL+=("CLAUDE.md does not import CORE.md — replace the old 'Lab conventions' follow-block with the single line '@$CONV_NAME/CORE.md' (keep all project-specific content), or run /bootstrapping-project in a Claude session to have the splice done for you")
+  MIGRATION=1
+fi
+stale=$(grep -oE "$CONV_NAME/[0-9]{2}-[a-z-]+\.md" CLAUDE.md 2>/dev/null | sort -u | tr '\n' ' ' || true)
+if [ -n "$stale" ]; then
+  WARN+=("CLAUDE.md references the pre-v3 numbered layout: ${stale}— these files no longer exist; old→new map in $CONV_NAME/LAB_CONVENTIONS.md")
+  MIGRATION=1
+fi
+if grep -qE '"Write\(\./(data/raw|uv\.lock|pixi\.lock)' .claude/settings.json 2>/dev/null; then
+  WARN+=("settings.json carries superseded Write() deny entries from the v2 template — remove them; Edit() rules cover all file-editing tools")
+  MIGRATION=1
+fi
+
 check "canonical tree present"      "[ -d src ] && [ -d data/raw ] && [ -d notebooks ]"
 for s in "${SKILLS[@]}"; do
   check "skill $s resolves"         "[ -f '.claude/skills/$s/SKILL.md' ]"
@@ -103,7 +121,6 @@ check "settings deny data/raw"      "grep -q 'data/raw' .claude/settings.json"
 check "settings hook wired"         "grep -q 'block_protected_writes' .claude/settings.json"
 check "hook script runs"            "echo '{}' | python3 '$CONV_DIR/templates/hooks/block_protected_writes.py'"
 check "justfile present"            "[ -f justfile ]"
-WARN=()
 if git -C "$CONV_DIR" describe --tags --exact-match >/dev/null 2>&1; then
   PASS+=("submodule pinned to a tag")
 else
@@ -117,6 +134,7 @@ if [ "$MODE" = "deploy" ]; then
 fi
 printf 'PASS  %s\n' "${PASS[@]}"
 [ ${#WARN[@]} -gt 0 ] && printf 'WARN  %s\n' "${WARN[@]}"
+[ "$MIGRATION" = 1 ] && echo "note: migration findings above — after fixing, also review this project's auto memory (/memory in a Claude session) for stale numbered-file references."
 if [ ${#FAIL[@]} -gt 0 ]; then
   printf 'FAIL  %s\n' "${FAIL[@]}"
   echo "→ fix the FAILs above, then re-run ./$CONV_NAME/deploy.sh --check"
