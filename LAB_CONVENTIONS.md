@@ -1,59 +1,56 @@
-# Lab Conventions
+# Lab Conventions — index
 
-This directory is the canonical reference for how science in this lab is reasoned about, and how code is written, built, tested, and run. Read every file before doing non-trivial work in a project that imports it.
+How this lab does science, delivered the way an LLM agent actually consumes
+instructions: a small **always-on core**, **skills** that fire at the moment of
+relevance, **path-scoped rules**, **reference docs** read on demand, and
+**deterministic enforcement** for the rules that must never break. Design
+rationale and prior art: `REFERENCES.md`.
 
-> **How we do science.** We do **solid, not speedy** science. Reproducibility is necessary but not sufficient; what makes a result trustworthy is **inferential robustness** — never jumping to a conclusion, inspecting the data and the result from many angles, distinguishing a genuine effect from an analytic artifact, and letting the **user adjudicate** at every fork. Every reported result must be **interpretation-ready**: legible, with enough context to be understood when you return to it weeks or months later. The "how we reason" files (`00`–`04`) come first and **outrank** the "how we build" files when the two ever tension.
+> **How we do science.** Solid, not speedy: inferential robustness, no premature
+> conclusions, data inspected from many angles, the user adjudicating every fork,
+> every result interpretation-ready months later. The full statement lives in
+> `CORE.md` — the one file that is always loaded.
 
-These conventions apply to **personal and lab-wide projects**. Things destined for PyPI / JOSS / public release have additional requirements not covered here.
+## Components
 
-## How to use these in a project
+| Layer | Where | Loads |
+|---|---|---|
+| **Core** | `CORE.md` | always (imported by project `CLAUDE.md`) |
+| **Skills** | `skills/` → project `.claude/skills/` | when their trigger fires |
+| `checking-robustness` | | headline claims: regime, multiverse, controls, sensitivity, blinding |
+| `reporting-results` | | any stated result: the 9-item reporting unit |
+| `interpretation-dashboards` | | headline figures & results notebooks |
+| `logging-decisions` | | analytic decisions → append-only log |
+| `persisting-data` | | saving derived data: formats, save-vs-recompute |
+| `scientific-figures` | | publication-quality panel craft |
+| `bootstrapping-project` | | `/bootstrapping-project` — deploy the harness |
+| **Rules** | `rules/` → project `.claude/rules/lab/` | when matching paths are touched |
+| `notebooks.md` | | `notebooks/**` — marimo, thin cells, look-first |
+| `testing.md` | | `tests/**` — pytest, hypothesis, control tests |
+| `pipelines.md` | | `workflow/**` — Snakemake, containers, DataLad |
+| **Reference** | `reference/` | read the one you need |
+| | | `environments` `packaging` `code-quality` `project-layout` `commands` `when-to-deviate` `release` |
+| **Enforcement** | `templates/settings.json` + `templates/hooks/` | deterministic: deny + PreToolUse hook |
+| **Evals** | `evals/` | run when conventions change |
+| **Deploy** | `deploy.sh` | one command, idempotent, `--check` doctor |
 
-In a project's root `CLAUDE.md`:
+## Where the old numbered files went (pre-v3 → v3)
 
-```markdown
-## Lab conventions
-Follow `lab-conventions/LAB_CONVENTIONS.md` and every file it indexes.
-Project-specific overrides go BELOW this line, and must explicitly
-name which lab convention they override and why.
-```
-
-Vendor `lab-conventions/` into projects via git submodule, git subtree, or a symlink — whichever is least friction. The convention files are authoritative; if a project's local CLAUDE.md disagrees, it must say so explicitly.
-
-## Files in this directory
-
-Ordered by precedence: **how we reason** first, **how we build** second. The file
-numbers track that priority — read low-to-high.
-
-### How we reason (read first)
-
-| File | Topic |
+| Old | New home |
 |---|---|
-| `00-principles.md` | The nine principles everything else follows from — culture first (incl. *the analyst surfaces, the user judges*; *no premature conclusions*; *look before you summarize*; *robustness is part of the claim*; *the record is part of the result*). Read first. |
-| `01-doing-science-with-claude.md` | How the agent behaves: surface every fork and stop for the user; provisional language; exploratory-vs-confirmatory labelling; surface disconfirming evidence first. |
-| `02-inferential-robustness.md` | Declare the per-project inference regime (low-n/high-trial within-subject+consistency vs population-level group+MC); multiverse-lite sweeps, positive/negative controls, sensitivity analysis, blind-ish analysis. |
-| `03-analysis-log.md` | The append-only decision log: what was tried, chosen, ruled out, and why — legible months later. |
-| `04-reporting.md` | Interpretation-ready reporting of every result (prose, tables, chat), not just figures. |
-| `05-dashboards.md` | Interpretation dashboards: juxtapose the result with hypothesis schematics (same plot fn, idealized data) + self-documenting text; their home is a **narrated marimo notebook** (concept + equations + refs + reading around each figure + the cortical maps). |
-
-### How we build
-
-| File | Topic |
-|---|---|
-| `06-environments.md` | uv + pixi: how environments are defined and reproduced. |
-| `07-packaging.md` | `pyproject.toml` shape, build backends, dependency groups. |
-| `08-code-quality.md` | Ruff, type checking (pyrefly / ty / jaxtyping), pre-commit. |
-| `09-testing.md` | pytest config, hypothesis, syrupy, shape-aware tests, controls. |
-| `10-notebooks.md` | Marimo as default; the thin-notebook and "look first" rules. |
-| `11-pipelines.md` | Snakemake, DataLad, containers, HPC. |
-| `12-project-layout.md` | Directory structure, data quarantine, AI-generated artifacts. |
-| `13-commands.md` | The standard `justfile` every project should ship. |
-| `14-data-formats.md` | Intermediate/derived file formats: netCDF + parquet, never `.npy`/`.pkl`. |
-| `15-storage-budget.md` | What to save vs recompute: reproducibility gate, cost ratio, tiers, recipes. |
-| `16-when-to-deviate.md` | Explicit list of situations where these rules don't apply. |
-| `17-release.md` | Optional. Read only when releasing a project (PyPI, JOSS, Zenodo). |
-
-See also `REFERENCES.md` — the prior art the "how we reason" conventions rest on, cited by short name throughout `00`–`05`.
+| `00-principles.md`, `01-doing-science-with-claude.md` | `CORE.md` (distilled) |
+| `02-inferential-robustness.md` | `skills/checking-robustness/` |
+| `03-analysis-log.md` | `skills/logging-decisions/` |
+| `04-reporting.md` | `skills/reporting-results/` |
+| `05-dashboards.md` | `skills/interpretation-dashboards/` |
+| `06-environments.md` `07-packaging.md` `08-code-quality.md` | `reference/` (same names) |
+| `09-testing.md` `10-notebooks.md` `11-pipelines.md` | `rules/` (path-scoped) |
+| `12-project-layout.md` `13-commands.md` | `reference/` |
+| `14-data-formats.md` `15-storage-budget.md` | `skills/persisting-data/` |
+| `16-when-to-deviate.md` `17-release.md` | `reference/` |
 
 ## Versioning
 
-Treat this directory as a versioned spec. Tag releases (`v1.0`, `v1.1`, …). A project pinned to `v1.0` should keep working forever; changes here are additive or breaking-with-a-tag, never silent. The culture-first reorganization (new `01`–`04`, renumbered build files, nine principles) is a **major** bump.
+Tagged spec, as before. This re-architecture is a **major** bump: projects pinned
+to v2 tags keep the numbered files; new deployments get this layout via
+`deploy.sh`. Never track `main` from a project.

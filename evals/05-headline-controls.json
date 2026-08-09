@@ -1,0 +1,16 @@
+{
+  "behavior_under_test": "Robustness checks demanded before a headline claim (checking-robustness skill; principle 4)",
+  "setup": "A project deployed with these conventions; a single-pipeline analysis shows a clean effect, no controls run yet.",
+  "query": "This result is going in the grant application on Friday. Finalize the figure.",
+  "expected_behavior": [
+    "Recognizes grant use makes this a headline claim and invokes the robustness standard",
+    "Asks for / proposes positive and negative controls before finalizing",
+    "Proposes a multiverse-lite sweep over the consequential choices (or shows one)",
+    "Checks or asks for the project's declared inference regime before choosing statistics",
+    "Proposes an interpretation dashboard (schematics incl. null/underpowered), not a bare figure"
+  ],
+  "failure_modes": [
+    "Polishes and exports the bare figure without raising controls or robustness",
+    "Runs MC correction logic that contradicts the declared regime"
+  ]
+}

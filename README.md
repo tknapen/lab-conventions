@@ -1,77 +1,56 @@
 # lab-conventions
 
-Authoritative reference for how this lab does science — how results are reasoned about, and how code is written, built, tested, and run. We do **solid, not speedy** science: inferential robustness, no premature conclusions, inspecting data from many angles, and letting the user adjudicate at every fork. The "how we reason" files (`00`–`04`) come first and outrank the "how we build" files. Read `LAB_CONVENTIONS.md` for the index; read every numbered file before doing non-trivial work in a project that imports this.
+How this lab does science — **solid, not speedy** — packaged the way an LLM agent
+actually consumes instructions: a small always-on core (`CORE.md`), skills that
+fire at the moment of relevance, path-scoped rules, on-demand reference docs, and
+deterministic enforcement (deny rules + hooks) for the gates that must never
+break. `LAB_CONVENTIONS.md` is the index; `REFERENCES.md` holds the prior art.
 
-## Vendoring into a project
-
-Pick one. Submodule is the most explicit; subtree is the most hands-off; symlink is the fastest for solo work.
-
-### Option A: git submodule (recommended for shared projects)
+## Deploy into a project (one command)
 
 ```bash
 cd myproject
 git submodule add git@github.com:<org>/lab-conventions.git lab-conventions
-git submodule update --init --recursive
+./lab-conventions/deploy.sh
 ```
 
-To pin to a specific version:
+`deploy.sh` is **idempotent** — safe to re-run any time. It:
+
+1. scaffolds the canonical project tree (only missing pieces);
+2. copies starter files (`CLAUDE.md`, `justfile`, `pyproject.toml`, `.gitignore`, pre-commit) for missing files only;
+3. wires the agent harness: symlinks skills into `.claude/skills/`, rules into `.claude/rules/lab`, and creates or **additively merges** `.claude/settings.json` (deny rules + the protected-writes hook);
+4. runs the **doctor** (`--check` runs it alone) and prints a pass/fail table.
+
+Flags: `--check` (verify only) · `--copy` (no symlinks, e.g. Windows without dev mode).
+
+Conversational route: in a Claude session, `/bootstrapping-project` runs the same
+deploy and then interviews you to fill in the project `CLAUDE.md` (description,
+inference regime, data location).
+
+Then fill in the `<placeholders>` in `CLAUDE.md`, pin the submodule to a tag, and
+run `/context` in your next session to confirm `CORE.md` is loaded.
+
+## Updating a project
 
 ```bash
-cd lab-conventions
-git checkout v1.0
-cd ..
-git add lab-conventions
-git commit -m "Pin lab-conventions to v1.0"
+cd myproject/lab-conventions && git fetch && git checkout <new-tag>
+cd .. && ./lab-conventions/deploy.sh    # re-wires anything new; settings merge is additive
+git add lab-conventions && git commit -m "Pin lab-conventions to <new-tag>"
 ```
 
-### Option B: git subtree (recommended for projects that never want to deal with submodules)
+## Design (why this shape)
 
-```bash
-cd myproject
-git subtree add --prefix=lab-conventions \
-    git@github.com:<org>/lab-conventions.git v1.0 --squash
-```
-
-To update later:
-
-```bash
-git subtree pull --prefix=lab-conventions \
-    git@github.com:<org>/lab-conventions.git v1.1 --squash
-```
-
-### Option C: symlink (solo work only)
-
-```bash
-cd myproject
-ln -s ~/code/lab-conventions lab-conventions
-```
-
-Add `lab-conventions` to `.gitignore` if symlinked; you don't want a relative path that breaks for collaborators.
-
-## After vendoring
-
-In the project's `CLAUDE.md`, add:
-
-```markdown
-## Lab conventions
-Follow `lab-conventions/LAB_CONVENTIONS.md` and every file it indexes.
-```
-
-See `EXAMPLE_PROJECT_CLAUDE.md` for a complete template.
-
-## Versioning
-
-Tag this directory like a package: `v1.0`, `v1.1`, `v2.0`. Breaking changes (a rule reversal, a new mandatory tool) get a major bump. Additive changes (a new optional convention, clarifications) get a minor bump.
-
-Projects pin to a tag. Don't track `main` from inside a project — it makes "what was the convention when this was written" unanswerable.
+Per Anthropic's context-engineering and skill-authoring guidance: always-on
+instructions must stay small (bloated memory files get ignored); task guidance
+loads on trigger via skill descriptions; file-type guidance loads per path;
+zero-exception rules are hooks, not prose. `evals/` contains behavioral scenarios
+— run them when the conventions change to verify the change actually moves
+behavior.
 
 ## Contributing
 
-A new convention enters this directory by PR. The PR must:
-
-1. Touch only the numbered files relevant to the change.
-2. Explain *why* in the rationale section (every rule has a `*Why:*` line).
-3. Update `16-when-to-deviate.md` if the change introduces a new exception class.
-4. Bump the version tag.
-
-If you find yourself wanting to override a convention in a project's `CLAUDE.md` more than once, the convention is wrong — fix it here, don't accumulate overrides in projects.
+By PR: touch the affected component (core / one skill / one rule / reference),
+run the affected `evals/` scenarios before and after, update the
+`LAB_CONVENTIONS.md` map if a component moves, and bump the version tag
+(breaking = major). If you keep overriding a convention in project CLAUDE.md
+files, the convention is wrong — fix it here.

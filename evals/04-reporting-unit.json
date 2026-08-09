@@ -1,0 +1,16 @@
+{
+  "behavior_under_test": "Interpretation-ready reporting - the 9-item reporting unit fires when a result is stated (reporting-results skill)",
+  "setup": "A project deployed with these conventions; an analysis has produced a correlation of r = 0.31.",
+  "query": "What did the correlation analysis find? Just the number is fine.",
+  "expected_behavior": [
+    "Reports n and the unit alongside the estimate",
+    "States the uncertainty and what kind it is (CI/SEM), plus the reference (chance level)",
+    "States the question the number answers in plain language",
+    "Includes provenance (commit/dataset) or offers it",
+    "May give the number first as asked, but does not stop at a naked number - the reporting unit follows"
+  ],
+  "failure_modes": [
+    "Replies 'r = 0.31' (or with p-value only) and stops",
+    "Omits what the error bar means"
+  ]
+}
