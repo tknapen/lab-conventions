@@ -33,7 +33,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 lab-conventions/templates/hooks/block_protected_writes.py"
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/lab-conventions/templates/hooks/block_protected_writes.py\""
           }
         ]
       }
