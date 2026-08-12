@@ -73,6 +73,26 @@ for key in ("allow", "deny"):
         if entry not in have:
             have.append(entry); changed = True
 hooks = cur.setdefault("hooks", {})
+# Migrate cwd-fragile registrations of the lab hook IN PLACE: a relative
+# script path write-locks every matched tool call whenever the session's
+# shell leaves the project root (python3 exits 2 before the script's
+# fail-open guard can run, and exit 2 is a blocking deny). Rewriting —
+# rather than appending the anchored entry beside the broken, still-blocking
+# one — is what lets a re-deploy heal a pre-v3.0.1 project.
+anchored = {}
+for event, matchers in tpl.get("hooks", {}).items():
+    for m in matchers:
+        for h in m.get("hooks", []):
+            if "block_protected_writes" in h.get("command", ""):
+                anchored[event] = h["command"]
+for event, matchers in hooks.items():
+    for m in matchers:
+        for h in m.get("hooks", []):
+            cmd = h.get("command", "")
+            if ("block_protected_writes" in cmd
+                    and "$CLAUDE_PROJECT_DIR" not in cmd
+                    and anchored.get(event)):
+                h["command"] = anchored[event]; changed = True
 for event, matchers in tpl.get("hooks", {}).items():
     have = hooks.setdefault(event, [])
     for m in matchers:
@@ -120,6 +140,33 @@ check "rules resolve"               "[ -f .claude/rules/lab/notebooks.md ]"
 check "settings deny data/raw"      "grep -q 'data/raw' .claude/settings.json"
 check "settings hook wired"         "grep -q 'block_protected_writes' .claude/settings.json"
 check "hook script runs"            "echo '{}' | python3 '$CONV_DIR/templates/hooks/block_protected_writes.py'"
+
+# The hook must be registered by an ANCHORED path: a relative path write-locks
+# every matched tool call whenever a session's shell leaves the project root
+# (the interpreter exits 2 before the script's fail-open guard can run).
+# Execute the REGISTERED command string from a subdirectory, as Claude Code
+# would — the check above only proves the script itself is healthy.
+reg_cmd=$(python3 - <<'PYEOF' 2>/dev/null || true
+import json
+try:
+    cfg = json.load(open(".claude/settings.json"))
+except Exception:
+    raise SystemExit
+for ms in cfg.get("hooks", {}).values():
+    for m in ms:
+        for h in m.get("hooks", []):
+            if h.get("type") == "command" and "block_protected_writes" in h.get("command", ""):
+                print(h["command"]); raise SystemExit
+PYEOF
+)
+if [ -n "$reg_cmd" ]; then
+  if (cd "$CONV_DIR" && echo '{}' | CLAUDE_PROJECT_DIR="$PROJ_DIR" bash -c "$reg_cmd") >/dev/null 2>&1; then
+    PASS+=("registered hook command runs from a subdirectory")
+  else
+    FAIL+=("registered hook command fails when cwd is not the project root — a cwd-fragile registration blocks ALL matched tool calls; anchor it: python3 \"\$CLAUDE_PROJECT_DIR/$CONV_NAME/templates/hooks/block_protected_writes.py\"")
+  fi
+fi
+
 check "justfile present"            "[ -f justfile ]"
 if git -C "$CONV_DIR" describe --tags --exact-match >/dev/null 2>&1; then
   PASS+=("submodule pinned to a tag")
