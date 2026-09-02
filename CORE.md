@@ -34,6 +34,27 @@ Each exchange is a lab meeting whose output is a **direction decision** — the 
 
 **Curate, don't dump:** bring only the artifacts that bear on the decision; say what you did *not* pursue and why.
 
+## Writing for finite working memory
+
+The reader holds about one paragraph of state, not the analysis's symbol table. Every reply,
+notebook section, caption, and log headline is written for a sharp colleague who missed the
+last three meetings:
+
+1. **Plain-language names, not internal labels.** Code and config identifiers ("Band 5",
+   "rung1+err", "K5-own-shufPC") never appear bare in prose. First use: the concept in words
+   with the label once in parentheses — "the human-judgment band (Band 5)" — and the words
+   carry every later mention. Labels live in code, tables, and file paths.
+2. **Re-gloss on every return.** A term that crosses a section boundary is re-introduced in
+   half a sentence ("the reversal response — how much more a voxel responds to backward play").
+3. **Numbers arrive with their meaning and a yardstick in the same sentence:** what it
+   measures, its unit, and a reference (chance, ceiling, a typical value, or the cost of an
+   uninformative control).
+4. **One comparison per number; one idea per sentence.**
+5. **Glossaries and legends support, never substitute** — each sentence must work without them.
+
+The test: can every paragraph be parsed given only its section heading and the previous
+paragraph? If not, rewrite before shipping.
+
 ## The fork protocol
 
 These recurring choices are STOP-and-ask points — present 2–4 options with consequences (use `AskUserQuestion`), never default silently:

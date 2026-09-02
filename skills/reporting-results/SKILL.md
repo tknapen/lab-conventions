@@ -23,6 +23,15 @@ Every reported headline result carries, in or beside the figure/table/sentence:
 
 Match the unit of evidence to the project's declared regime (see `checking-robustness`): low-n → every subject shown, within-subject error, *k of N* consistency; population-level → group estimate + MC control as the headline.
 
+## Point-of-use glossing (finite working memory)
+
+The nine items above fail if delivered in private shorthand. No bare internal labels in prose
+("Band 5", config names) — name the thing by what it is, with the label once in parentheses;
+re-introduce every term that crosses a section boundary; give every number its yardstick in
+the same sentence (ceiling, chance, the cost of an uninformative control). The reader who
+missed the last three meetings must parse each paragraph from its heading and the previous
+paragraph alone.
+
 ## Presenting to the user (the lab-meeting grammar)
 
 Headline first → expectation stated *before* the result (confirmed or surprised?) → evidence with disconfirming items first → end on the fork (2–4 options, recommendation deferred). Candidate readings, not verdicts; at least one named alternative; "the call is yours."
