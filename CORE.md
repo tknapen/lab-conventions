@@ -51,6 +51,11 @@ last three meetings:
    uninformative control).
 4. **One comparison per number; one idea per sentence.**
 5. **Glossaries and legends support, never substitute** — each sentence must work without them.
+6. **Operational verbs are defined at first use.** Words like *absorbs*, *subsumes*, *survives
+   a control*, or *explains away* name analysis operations — spell out the operation the first
+   time each document uses the word ("removing A no longer costs held-out accuracy once B is
+   present") and re-gloss it like any other term. A band or variable borrowed from another
+   analysis is always attributed to its model.
 
 The test: can every paragraph be parsed given only its section heading and the previous
 paragraph? If not, rewrite before shipping.
