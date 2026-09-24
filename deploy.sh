@@ -39,13 +39,11 @@ if [ "$MODE" = "deploy" ]; then
   done
 
   # 2) Templates for missing files only — never overwrite
-  declare -A TPL=(
-    [justfile]="justfile" [pyproject.toml]="pyproject.toml"
-    [.gitignore]="gitignore" [.pre-commit-config.yaml]="pre-commit-config.yaml"
-    [CLAUDE.md]="CLAUDE.md"
-  )
-  for dst in "${!TPL[@]}"; do
-    if [ -e "$dst" ]; then skip "file $dst"; else cp "$CONV_DIR/templates/${TPL[$dst]}" "$dst"; note "created $dst"; fi
+  # "dst:template" pairs — no associative array, macOS ships bash 3.2
+  for pair in justfile:justfile pyproject.toml:pyproject.toml .gitignore:gitignore \
+              .pre-commit-config.yaml:pre-commit-config.yaml CLAUDE.md:CLAUDE.md; do
+    dst="${pair%%:*}"; tpl="${pair#*:}"
+    if [ -e "$dst" ]; then skip "file $dst"; else cp "$CONV_DIR/templates/$tpl" "$dst"; note "created $dst"; fi
   done
 
   # 3) Wire skills and rules (relative symlinks survive clones on the same OS)
@@ -179,7 +177,7 @@ if [ "$MODE" = "deploy" ]; then
   [ ${#DONE[@]} -gt 0 ]    && printf 'did:     %s\n' "${DONE[@]}"
   [ ${#SKIPPED[@]} -gt 0 ] && echo "skipped: ${#SKIPPED[@]} already-present items"
 fi
-printf 'PASS  %s\n' "${PASS[@]}"
+[ ${#PASS[@]} -gt 0 ] && printf 'PASS  %s\n' "${PASS[@]}"
 [ ${#WARN[@]} -gt 0 ] && printf 'WARN  %s\n' "${WARN[@]}"
 [ "$MIGRATION" = 1 ] && echo "note: migration findings above — after fixing, also review this project's auto memory (/memory in a Claude session) for stale numbered-file references."
 if [ ${#FAIL[@]} -gt 0 ]; then
