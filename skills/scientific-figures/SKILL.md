@@ -320,3 +320,6 @@ Style serves communication, not the other way around. Deviate when:
 - A talk audience won't read 7pt labels — scale up via `sns.set_context('talk')` rather than fighting the rcParams
 
 Document the deviation briefly in a code comment so the next person (or future you) understands why.
+
+- **Categorical tick labels: always `rotation=45, ha="right"`** (PI directive 2026-09-04 — overlapping or steeply-rotated labels hinder interpretation; 45° uniformly, no 0/18/30/60/90 variants).
+- **Despine gotcha:** `Spine.set_position` triggers `reset_ticks()`, silently wiping label rotation/ha/fontsize — despine helpers must capture and re-apply label properties (done repo-wide 2026-09-05); always verify rotation on a RENDERED figure, not in source.
