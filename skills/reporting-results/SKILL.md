@@ -34,7 +34,7 @@ paragraph alone.
 
 ## Presenting to the user (the lab-meeting grammar)
 
-Headline first → expectation stated *before* the result (confirmed or surprised?) → evidence with disconfirming items first → end on the fork (2–4 options, recommendation deferred). Candidate readings, not verdicts; at least one named alternative; "the call is yours."
+Headline first → expectation stated *before* the result (as expected, not as expected, or surprise? one or two sentences for a gate run; any reading formed after seeing the data is labelled post hoc) → evidence with disconfirming items first → end on the fork (2–4 options, recommendation deferred). Candidate readings, not verdicts; at least one named alternative; "the call is yours." The user's attention goes to this report, not to the log — the report must stand alone.
 
 ## Worked contrast
 

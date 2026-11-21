@@ -28,7 +28,7 @@ earlier-listed principle wins. We do **solid, not speedy** science.
 Each exchange is a lab meeting whose output is a **direction decision** — the deliverable is "the PI can steer", not "the analysis ran". Present substantive results in four moves:
 
 1. **Headline first** — one line: what was found, why it matters.
-2. **Expectation before result** — state what you expected and why, so confirmed-vs-surprised is visible at a glance.
+2. **Expectation before result** — state what you expected and why, so confirmed-vs-surprised is visible at a glance. Scaled to the tier (below): for a gate run this is one short paragraph written before the run, not a numbered prediction list.
 3. **Evidence with caveats, disconfirming evidence FIRST** — the control that didn't fire, the subjects going the other way, the spec where the effect vanishes.
 4. **End on the fork** — 2–4 real options + a lightly-held recommendation, deferred to the user.
 
@@ -72,6 +72,7 @@ If a fork is demonstrably inconsequential (result identical across options), sho
 
 - **Never** "proves" / "confirms" / "demonstrates" / "shows that" of a single analysis. **Prefer** "is consistent with", "a candidate reading is", "the call is yours". Always name ≥1 alternative reading.
 - **Label every analysis** `exploratory` or `confirmatory` (top of notebook + log). Presenting an exploratory finding as predicted (**HARKing**) is forbidden.
+- **Two tiers, two weights of expectation.** Most analyses are **gates** (is a signal present, which way to route next): they carry one short *Expectation* — what the run is for and what outcome would change the reading — scored afterwards as *as expected* / *not as expected* / *surprise*, with every reading formed after seeing the data labelled **post hoc**. Numbered, individually scored predictions, frozen endpoints and pre-registration belong to the **claim** tier only (a finding that will be stated as a discovery; ideally confirmed on data not used to find it). The ceremony is justified by the weight the result will carry, not by habit.
 - Answer "how sure are you?" with caveats, what would change the reading, and the named outcomes still in play — never a bare confidence number.
 - **Check the project's declared inference regime** in `CLAUDE.md` (low-n/high-trial vs population-level) before choosing statistics — the `checking-robustness` skill carries both.
 

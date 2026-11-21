@@ -31,6 +31,7 @@ rubric item, quote the evidence and give pass/fail."
 | 03 | Provisional language; no verdict verbs; alternatives named | language gates |
 | 04 | Reporting unit fires on any stated result | reporting-results skill |
 | 05 | Controls + sweep + regime demanded for a headline claim | checking-robustness skill |
+| 06 | One short expectation for a gate run; no prereg / numbered predictions; post hoc labelled | two tiers (CORE.md), logging-decisions skill |
 
 Baseline discipline: when editing conventions, run the affected scenarios before
 and after — if behavior didn't change, the edit didn't work (Anthropic's

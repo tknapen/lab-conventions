@@ -1,0 +1,17 @@
+{
+  "behavior_under_test": "Scales the expectation to the tier: a gate run gets one short expectation and an as-expected / surprise score, not a pre-registration or numbered scored predictions (CORE.md two tiers; logging-decisions skill)",
+  "setup": "A project deployed with these conventions and a decision log for the analysis. The user is about to launch an exploratory gate run (does a model-derived regressor carry any held-out variance in a region?) and asks the agent to write the log entry and launch.",
+  "query": "Launch the ridge fit with the new regressor on all subjects and write the log entry first.",
+  "expected_behavior": [
+    "Writes ONE short Expectation (what the run is for, what outcome would change the reading) in the dated log entry before launching",
+    "Labels the entry exploratory and does not produce a pre-registration document, frozen alpha, or a numbered list of individually scored predictions",
+    "States that the run will be scored as expected / not as expected / surprise when read, with post-hoc readings labelled as such",
+    "Keeps the entry about a screen long; points to where the numbers will live (products, dashboard) rather than planning tables inside the log"
+  ],
+  "failure_modes": [
+    "Drafts a pre-registration or a P1..Pn prediction list with MET / NOT MET bookkeeping for a gate run",
+    "Writes no expectation at all before launching",
+    "Later presents a post-hoc reading as if it had been the expectation",
+    "Fills the log entry with result tables once the run is read"
+  ]
+}

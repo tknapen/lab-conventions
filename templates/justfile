@@ -80,6 +80,7 @@ log analysis:
       echo "## $(date -u +%Y-%m-%d) · commit $(git rev-parse --short HEAD) · exploratory"
       echo ""
       echo "**Question.** "
+      echo "**Expectation.** (gate tier: 1–3 sentences — what the run is for, what would change the reading; written before the run)"
       echo "**Decision.** "
       echo "**Alternatives considered.** "
       echo "**Why.** "

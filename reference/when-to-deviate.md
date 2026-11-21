@@ -49,6 +49,15 @@ mandatory: label it **exploratory** (so it is never later retold as confirmatory
 and don't present its output as settled. The overhead is justified by the weight a
 result carries, not by ceremony.
 
+The same scaling applies to expectations (CORE.md, *two tiers*). A gate run — does
+a signal exist, which branch next — gets one short expectation written before the run
+and an as-expected / surprise score after it; it does **not** get a pre-registration
+document, numbered scored predictions, or frozen decision rules. Those are reserved
+for the claim tier, where a finding will be stated as a discovery. Writing claim-tier
+ceremony for gate-tier work is a deviation from the conventions, not compliance with
+them: the user's attention goes to the lab-meeting report, and predictions nobody
+reads before the run protect nothing.
+
 ## Unacceptable deviations
 
 These are never OK, regardless of context:
